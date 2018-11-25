@@ -27,10 +27,17 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnNewDevice"
+        android:id="@+id/btnAddDevice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="mOnClick"
         android:text="신규 디바이스 등록"/>
+    <Button
+        android:id="@+id/btnRemoveDevice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="mOnClick"
+        android:text="디바이스 제거"/>
 
     <ListView
         android:id="@+id/listDevice"
