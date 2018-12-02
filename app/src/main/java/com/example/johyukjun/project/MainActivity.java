@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
                 if (id.equals("jo") && pw.equals("0000")) {
                     intent = new Intent(this, HomeManagerActivity.class);
                     startActivity(intent);
+
+                    XmlManager.getInstance();
+                    XmlManager.XmlFIleMake(id, pw);
                 }
                 else {
                     intent = new Intent(this, HomeActivity.class);

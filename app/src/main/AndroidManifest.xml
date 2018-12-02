@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.johyukjun.project">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,6 +22,8 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".Deivce_Activity" />
         <activity android:name=".HomeManagerActivity"></activity>
+
     </application>
 
 </manifest>
+
