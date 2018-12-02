@@ -1,5 +1,6 @@
 package com.example.johyukjun.project;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,6 +29,7 @@ public class XmlManager {
         return one;
     }
 
+    // xml string을 만들어서 리턴하는 함수 필요
 
     public static void XmlFIleMake(String id, String pw) {
 
@@ -67,6 +69,9 @@ public class XmlManager {
 
             //we set the FileOutputStream as output for the serializer, using UTF-8 encoding
 
+
+            // use outputstream
+            // newtwork manager needed
             serializer.setOutput(fileos, "UTF-8");
 
             //Write <?xml declaration with encoding (if encoding not null) and standalone flag (if standalone not null)
@@ -145,5 +150,60 @@ public class XmlManager {
     }
 
 
+
+    public static String XmlStrMake(String id, String pw) {
+
+        String finalString = "";
+
+        //we create a XmlSerializer in order to write xml data
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        XmlSerializer serializer = Xml.newSerializer();
+
+        try {
+            // use outputstream
+            //we set the FileOutputStream as output for the serializer, using UTF-8 encoding
+            serializer.setOutput(stream, "UTF-8");
+
+            //Write <?xml declaration with encoding (if encoding not null) and standalone flag (if standalone not null)
+            serializer.startDocument(null, true);
+
+            //set indentation option
+            serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+
+            //start a tag called "root"
+            serializer.startTag(null, "root");
+
+            serializer.startTag(null, "Id");
+
+            //write some text inside
+            serializer.text(id);
+
+            serializer.endTag(null, "Id");
+
+            serializer.startTag(null, "Pw");
+
+            //write some text inside
+            serializer.text(pw);
+
+            serializer.endTag(null, "Pw");
+
+            serializer.endTag(null, "root");
+
+            serializer.endDocument();
+
+            //write xml data into the OutputStream
+            serializer.flush();
+
+            finalString = new String(stream.toByteArray());
+
+            stream.close();
+
+        } catch (Exception e) {
+
+            Log.e("Exception", "error occurred");
+
+        }
+        return finalString;
+    }
 
 }
