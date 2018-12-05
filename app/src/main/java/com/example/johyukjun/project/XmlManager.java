@@ -31,7 +31,7 @@ public class XmlManager {
 
     // xml string을 만들어서 리턴하는 함수 필요
 
-    public static void XmlFIleMake(String id, String pw) {
+    public static void MakeXmlFIle(String id, String pw) {
 
         //create a new file called "new.xml" in the SD card
 
@@ -149,9 +149,7 @@ public class XmlManager {
         }
     }
 
-
-
-    public static String XmlStrMake(String id, String pw) {
+    public static String MakeXmlStr(String id, String pw) {
 
         String finalString = "";
 
@@ -199,7 +197,6 @@ public class XmlManager {
             stream.close();
 
         } catch (Exception e) {
-
             Log.e("Exception", "error occurred");
 
         }
