@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/DarkBlue"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/btnDeviceFunction01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="FUNCTION 01"/>
+        android:background="@drawable/button_default"
+        android:text="FUNCTION 01"
+        android:textColor="@color/White" />
+
     <Button
         android:id="@+id/btnDeviceFunction02"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="FUNCTION 02"/>
+        android:background="@drawable/button_default"
+        android:text="FUNCTION 02"
+        android:textColor="@color/White" />
+
     <Button
         android:id="@+id/btnDeviceFunction03"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="FUNCTION 03"/>
+        android:background="@drawable/button_default"
+        android:text="FUNCTION 03"
+        android:textColor="@color/White" />
 </LinearLayout>

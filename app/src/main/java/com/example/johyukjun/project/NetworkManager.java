@@ -106,6 +106,7 @@ public class NetworkManager extends AsyncTask<Void, Void, Void> {
         try {
             // xmlstream to string
             // String 형식의 문자열 구성
+            XmlManager.getInstance();
             String str = XmlManager.MakeXmlStr(id, pw);
             // String 형식의 문자열을 byte 배열로 변환
             byte[] data = str.getBytes();

@@ -5,10 +5,18 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/White</item>
         <!-- No Title Bar-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="EditTextTheme">
+        <item name = "android:gravity">center</item>
+        <item name = "android:textColorHint">@color/AlphaWhite</item>
+        <item name = "android:textColor">@color/White</item>
+        <item name = "android:backgroundTint">@color/White</item>
+        <item name="colorControlNormal">@color/White</item>
     </style>
 
 </resources>
