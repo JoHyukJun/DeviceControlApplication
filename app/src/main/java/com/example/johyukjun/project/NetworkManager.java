@@ -1,6 +1,7 @@
 package com.example.johyukjun.project;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -9,7 +10,7 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
 
-public class NetworkManager extends Thread {
+public class NetworkManager extends AsyncTask<Void, Void, Void> {
 
     private String ip = "39.118.142.34";
     private int port_number = 33265;
@@ -45,30 +46,50 @@ public class NetworkManager extends Thread {
     }
 
     @Override
-    public void run()
-    {
-        if(funcval == NetType.SOCKET)
-            TryConnect();
-        else if (funcval == NetType.LOGIN)
-            SendData(m_id, m_pw);
+    protected void onPreExecute() {
+        super.onPreExecute();
     }
 
+    @Override
+    protected Void doInBackground(Void... voids) {
+        if(funcval == NetType.SOCKET)
+            TryConnect();
+        else if(funcval == NetType.LOGIN)
+            SendData(m_id, m_pw);
+
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        Log.d("N", "onPostExecute");
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        super.onProgressUpdate(values);
+    }
 
     public int TryConnect() {
         // IP 주소와 포트 번호를 관리하는 InetSocketAddress 객체를 생성하여 부모 클래스인
         // SocketAddress 클래스 객체로 받는다.
         try {
             // 서버에 연결을 시도한다.
+            Log.d("N", "connecting...");
             m_socket = new Socket(ip, port_number);
         } catch (UnknownHostException ue) {
             // 서버의 IP 주소와 관련된 문제가 있을 때 발생한다.
             // 주로 IP 주소나 포트 번호를 잘못 입력하거나 서버가 실행되어 있지 않아서
             // 연결할 수 없는 상태일 때 발생한다.
+            Log.d("N", "UnknownHostException");
             return -1;
         } catch (IOException ie) {
             // 소켓을 생성하는 중에 에러가 생겼을 때 발생한다.
+            Log.d("N", "IOException");
             return -2;
         }
+        Log.d("N", "Connection Established");
         return 0;
     }
 

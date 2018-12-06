@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.util.Log;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         m_BtnLogIn = (Button) findViewById(R.id.btnLogIn);
@@ -41,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "mOnClick()");
                 //이곳 주석을 풀고 실험해볼것
                 // 네트워크 연결은 메인 쓰레드에서 할 수 없음
-                //m_networkmanager.setFunc(NetType.SOCKET);
-                //m_networkmanager.start();
+                m_networkmanager.setFunc(NetType.SOCKET);
+                m_networkmanager.execute();
 
                 if (id.equals("jo") && pw.equals("0000")) {
                     intent = new Intent(this, HomeManagerActivity.class);
@@ -51,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
                     //XmlManager.MakeXmlFIle(id, pw);
 
                     //이곳 주석을 풀고 실험해볼것
-                    //m_networkmanager.setUserInfo(id, pw);
-                    //m_networkmanager.start();
+                    m_networkmanager.setUserInfo(id, pw);
+                    m_networkmanager.execute();
                 }
                 else {
                     intent = new Intent(this, HomeActivity.class);

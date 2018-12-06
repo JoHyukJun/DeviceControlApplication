@@ -1,70 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_centerInParent = "true"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/Banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_centerHorizontal="true"
+                android:text="IoT HUB"
+                android:textSize="50sp" />
+        </RelativeLayout>
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/IDPWFrame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="ID"
-            android:textSize="30dp" />
+            android:layout_below="@+id/Banner">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ID">
+                <!--
+                <TextView
+                    android:id="@+id/IDText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="ID"
+                    android:textSize="30sp" />
+                -->
+                <EditText
+                    android:id="@+id/editId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="아이디"
+                    android:gravity="center"
+                    android:inputType="text" />
+            </RelativeLayout>
 
-        <EditText
-            android:id="@+id/editId"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ID">
+                <!--
+                <TextView
+                    android:id="@+id/PWText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="PW"
+                    android:textSize="30sp" />
+                -->
+                <EditText
+                    android:id="@+id/editPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="비밀번호"
+                    android:gravity="center"
+                    android:inputType="numberPassword" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="아이디"
-            android:inputType="text" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_below="@+id/IDPWFrame">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_centerHorizontal="true">
+                <Button
+                    android:id="@+id/btnLogIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="mOnClick"
+                    android:text="로그인" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="PW"
-            android:textSize="30dp" />
-
-        <EditText
-            android:id="@+id/editPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="비밀번호"
-            android:inputType="numberPassword" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnLogIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="mOnClick"
-            android:text="로그인"/>
-
-        <Button
-            android:id="@+id/btnSignUpActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="mOnClick"
-            android:text="회원가입"/>
-    </LinearLayout>
-</LinearLayout>
+                <Button
+                    android:id="@+id/btnSignUpActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@id/btnLogIn"
+                    android:onClick="mOnClick"
+                    android:text="회원가입" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
