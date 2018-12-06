@@ -1,6 +1,8 @@
 package com.example.johyukjun.project;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,13 +10,16 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.util.Log;
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText m_Id, m_Password;
     private Button m_BtnLogIn, m_BtnSignUp;
-    private NetworkManager m_networkmanager;
-    //private XmlManager m_xmlmanager;
+    private ClientThread mClientThread;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         m_Id = (EditText) findViewById(R.id.editId);
         m_Password = (EditText) findViewById(R.id.editPassword);
 
-        m_networkmanager = NetworkManager.getInstance();
 
     }
 
@@ -43,29 +47,45 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "mOnClick()");
                 //이곳 주석을 풀고 실험해볼것
                 // 네트워크 연결은 메인 쓰레드에서 할 수 없음
-                m_networkmanager.setFunc(NetType.SOCKET);
-                m_networkmanager.execute();
 
-                if (id.equals("jo") && pw.equals("0000")) {
-                    intent = new Intent(this, HomeManagerActivity.class);
-                    startActivity(intent);
-                    //이곳 주석 풀면 sdcard 있는 디렉토리에 xml파일 생성
-                    //XmlManager.MakeXmlFIle(id, pw);
+                mClientThread = new ClientThread(mMainHandler);
+                mClientThread.start();
 
-                    //이곳 주석을 풀고 실험해볼것
-                    m_networkmanager.setUserInfo(id, pw);
-                    m_networkmanager.execute();
-                }
-                else {
-                    intent = new Intent(this, HomeActivity.class);
-                    startActivity(intent);
-                }
+
+//                if (id.equals("jo") && pw.equals("0000")) {
+//                    intent = new Intent(this, HomeManagerActivity.class);
+//                    startActivity(intent);
+//
+//                    //이곳 주석을 풀고 실험해볼것
+//                }
+//                else {
+//                    intent = new Intent(this, HomeActivity.class);
+//                    startActivity(intent);
+//                }
                 break;
 
             case R.id.btnSignUpActivity:
-                intent = new Intent(this, SignUpActivity.class);
-                startActivity(intent);
+//                intent = new Intent(this, SignUpActivity.class);
+//                startActivity(intent);
+                if (SendThread.mHandler != null) {
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = m_Id.getText().toString();
+                    SendThread.mHandler.sendMessage(msg);
+                    m_Id.selectAll();
+                }
                 break;
         }
     }
+
+    private Handler mMainHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    Log.d(TAG, msg.obj.toString());
+                    break;
+            }
+        }
+    };
 }
