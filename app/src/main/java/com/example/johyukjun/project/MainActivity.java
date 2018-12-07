@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private Button m_BtnLogIn, m_BtnSignUp;
     private ClientThread mClientThread;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +43,16 @@ public class MainActivity extends AppCompatActivity {
                 String pw = m_Password.getText().toString();
 
                 Log.d(TAG, "mOnClick()");
-                //이곳 주석을 풀고 실험해볼것
-                // 네트워크 연결은 메인 쓰레드에서 할 수 없음
-
                 mClientThread = new ClientThread(mMainHandler);
                 mClientThread.start();
 
-
+                if (SendThread.mHandler != null) {
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
+                    SendThread.mHandler.sendMessage(msg);
+                    m_Id.selectAll();
+                }
 //                if (id.equals("jo") && pw.equals("0000")) {
 //                    intent = new Intent(this, HomeManagerActivity.class);
 //                    startActivity(intent);
