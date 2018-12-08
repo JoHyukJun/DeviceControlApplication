@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/DarkBlue">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,10 +16,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="S/N"
+            android:textColor="@color/White"
             android:textSize="30dp" />
 
         <EditText
             android:id="@+id/editMSerialNumber"
+            style="@style/EditTextTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -37,10 +40,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="D/N"
+            android:textColor="@color/White"
             android:textSize="30dp" />
 
         <EditText
             android:id="@+id/editMDeviceName"
+            style="@style/EditTextTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -59,10 +64,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="D/T"
+            android:textColor="@color/White"
             android:textSize="30dp" />
 
         <EditText
             android:id="@+id/editMDeviceType"
+            style="@style/EditTextTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -81,10 +88,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="A/I"
+            android:textColor="@color/White"
             android:textSize="30dp" />
 
         <EditText
             android:id="@+id/editMActivityInfo"
+            style="@style/EditTextTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -97,13 +106,17 @@
         android:id="@+id/btnMAddDevice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_default"
         android:onClick="mOnClick"
+        android:textColor="@color/White"
         android:text="신규 디바이스 등록" />
 
     <Button
         android:id="@+id/btnMRemoveDevice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_default"
         android:onClick="mOnClick"
+        android:textColor="@color/White"
         android:text="디바이스 제거" />
 </LinearLayout>

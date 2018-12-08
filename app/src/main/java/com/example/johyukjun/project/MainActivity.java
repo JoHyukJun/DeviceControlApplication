@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 String id = m_Id.getText().toString();
                 String pw = m_Password.getText().toString();
 
-                Log.d(TAG, "mOnClick()");
+                Log.d(TAG, "case btnLogIn");
                 mClientThread = new ClientThread(mMainHandler);
                 mClientThread.start();
 
@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
                     SendThread.mHandler.sendMessage(msg);
                     m_Id.selectAll();
                 }
+                // 로그인 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
+
 //                if (id.equals("jo") && pw.equals("0000")) {
 //                    intent = new Intent(this, HomeManagerActivity.class);
 //                    startActivity(intent);
-//
-//                    //이곳 주석을 풀고 실험해볼것
 //                }
 //                else {
 //                    intent = new Intent(this, HomeActivity.class);
@@ -68,6 +68,30 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btnSignUpActivity:
 //                intent = new Intent(this, SignUpActivity.class);
 //                startActivity(intent);
+
+                /*
+                String tempid = m_Id.getText().toString();
+                String temppw = m_Password.getText().toString();
+                String temp = XmlManager.TempXmlStr(tempid, temppw);
+                temp += XmlManager.Temp2XmlStr(tempid, temppw);
+                temp += XmlManager.Temp3XmlStr(tempid, temppw);
+                temp += XmlManager.Temp4XmlStr(tempid, temppw);
+                temp += XmlManager.Temp5XmlStr(tempid, temppw);
+                temp += XmlManager.Temp6XmlStr(tempid, temppw);
+                temp += XmlManager.Temp7XmlStr(tempid, temppw);
+                temp += XmlManager.Temp8XmlStr(tempid, temppw);
+                temp += XmlManager.Temp9XmlStr(tempid, temppw);
+                temp += XmlManager.Temp10XmlStr(tempid, temppw);
+                temp += XmlManager.Temp11XmlStr(tempid, temppw);
+                temp += XmlManager.Temp12XmlStr(tempid, temppw);
+                temp += XmlManager.Temp13XmlStr(tempid, temppw);
+                temp += XmlManager.Temp14XmlStr(tempid, temppw);
+                temp += XmlManager.Temp15XmlStr(tempid, temppw);
+                temp += XmlManager.Temp16XmlStr(tempid, temppw);
+                temp += XmlManager.Temp17XmlStr(tempid, temppw);
+                temp += XmlManager.Temp18XmlStr(tempid, temppw);
+                Log.d(TAG, temp);
+
                 if (SendThread.mHandler != null) {
                     Message msg = Message.obtain();
                     msg.what = 1;
@@ -75,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     SendThread.mHandler.sendMessage(msg);
                     m_Id.selectAll();
                 }
+                */
                 break;
         }
     }
