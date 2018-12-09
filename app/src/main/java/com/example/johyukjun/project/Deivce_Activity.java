@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 public class Deivce_Activity extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

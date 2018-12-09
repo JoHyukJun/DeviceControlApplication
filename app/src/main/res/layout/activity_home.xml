@@ -38,6 +38,14 @@
         android:textColor="@color/White"
         android:text="신규 디바이스 등록"/>
     <Button
+        android:id="@+id/btnSelectDevice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_default"
+        android:onClick="mOnClick"
+        android:textColor="@color/White"
+        android:text="디바이스 선택"/>
+    <Button
         android:id="@+id/btnRemoveDevice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

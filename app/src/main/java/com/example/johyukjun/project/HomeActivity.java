@@ -69,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
                     m_Adapter.notifyDataSetChanged();
                 }
                 break;
+                
             case R.id.btnSelectDevice:
                 int selPos;
                 selPos = m_ListView.getCheckedItemPosition();
