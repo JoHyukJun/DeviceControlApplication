@@ -1,5 +1,6 @@
 package com.example.johyukjun.project;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -87,6 +88,7 @@ class SendThread extends Thread {
         mOutStream = outputStream;
     }
 
+    @SuppressLint("HandlerLeak")
     @Override
     public void run() {
         Looper.prepare();

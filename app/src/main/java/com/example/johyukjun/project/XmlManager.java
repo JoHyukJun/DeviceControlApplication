@@ -65,7 +65,6 @@ public class XmlManager {
     }
 
     public static String ParseLoginXmlStr(String xmlStr) {
-
         String returnStr = "";
 
         XmlPullParserFactory parserFactory;
@@ -77,9 +76,10 @@ public class XmlManager {
             parser.setInput(inStream, "UTF-8");
 
             int eventType = parser.getEventType();
-            String startTag;
             String endTag;
             String text;
+            String serverReply = "";
+            String packetType = "";
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType)
@@ -87,14 +87,18 @@ public class XmlManager {
                     case XmlPullParser.START_DOCUMENT:
                         break;
                     case XmlPullParser.START_TAG:
-                        startTag = parser.getName();
-                        if (startTag.equals("IoTPacket, \"packetType = 2\"")) {
+                        if (parser.getName().equals("IoTPacket")) {
+                            packetType = parser.getAttributeValue(null, "PacketType");
+                        }
+                        else if (parser.getName().equals("ServerMsg")) {
+                            serverReply = parser.getAttributeValue(null,"MSG");
+                            returnStr = serverReply;
                         }
                         break;
                     case XmlPullParser.END_TAG:
                         break;
                     case XmlPullParser.TEXT:
-                        returnStr = parser.getText();
+                        //returnStr = parser.getText();
                         break;
                     default:
                         break;
@@ -113,7 +117,6 @@ public class XmlManager {
     }
 
 
-/*
     public static String TempXmlStr(String id, String pw) {
         //we create a XmlSerializer in order to write xml data
         String returnStr = "";
@@ -148,7 +151,7 @@ public class XmlManager {
         }
         return returnStr;
     }
-    public static String Temp2XmlStr(String id, String pw) {
+    public static String fooServerLoginXmlStr() {
         //we create a XmlSerializer in order to write xml data
         String returnStr = "";
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -166,7 +169,13 @@ public class XmlManager {
             serializer.attribute(null, "PacketType", "1");
 
             serializer.startTag(null,"ServerMsg");
-            serializer.attribute(null, "MSG", "complete");
+            serializer.attribute(null, "DevNumber", "3");
+            serializer.attribute(null, "Serial", "ABCD1");
+            serializer.attribute(null, "Alias", "깜빡이");
+            serializer.attribute(null, "Serial", "ABCD2");
+            serializer.attribute(null, "Alias", "스위치");
+            serializer.attribute(null, "Serial", "ABCD3");
+            serializer.attribute(null, "Alias", "도어락");
             serializer.endTag(null,"ServerMsg");
 
             serializer.endTag(null,"IoTPacket");
@@ -928,5 +937,4 @@ public class XmlManager {
 
         }
     }
-*/
 }

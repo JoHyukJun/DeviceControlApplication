@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Vector;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void mOnClick(View v) {
         Intent intent;
-
+        String tempMsg;
         switch (v.getId()) {
             case R.id.btnLogIn:
                 String id = m_Id.getText().toString();
@@ -53,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
                     SendThread.mHandler.sendMessage(msg);
                     m_Id.selectAll();
                 }
+
+
+
+                intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+
+
+
                 // 로그인 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
 //                if (id.equals("jo") && pw.equals("0000")) {
@@ -66,40 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.btnSignUpActivity:
-//                intent = new Intent(this, SignUpActivity.class);
-//                startActivity(intent);
-
-                /*
-                String tempid = m_Id.getText().toString();
-                String temppw = m_Password.getText().toString();
-                String temp = XmlManager.TempXmlStr(tempid, temppw);
-                temp += XmlManager.Temp2XmlStr(tempid, temppw);
-                temp += XmlManager.Temp3XmlStr(tempid, temppw);
-                temp += XmlManager.Temp4XmlStr(tempid, temppw);
-                temp += XmlManager.Temp5XmlStr(tempid, temppw);
-                temp += XmlManager.Temp6XmlStr(tempid, temppw);
-                temp += XmlManager.Temp7XmlStr(tempid, temppw);
-                temp += XmlManager.Temp8XmlStr(tempid, temppw);
-                temp += XmlManager.Temp9XmlStr(tempid, temppw);
-                temp += XmlManager.Temp10XmlStr(tempid, temppw);
-                temp += XmlManager.Temp11XmlStr(tempid, temppw);
-                temp += XmlManager.Temp12XmlStr(tempid, temppw);
-                temp += XmlManager.Temp13XmlStr(tempid, temppw);
-                temp += XmlManager.Temp14XmlStr(tempid, temppw);
-                temp += XmlManager.Temp15XmlStr(tempid, temppw);
-                temp += XmlManager.Temp16XmlStr(tempid, temppw);
-                temp += XmlManager.Temp17XmlStr(tempid, temppw);
-                temp += XmlManager.Temp18XmlStr(tempid, temppw);
-                Log.d(TAG, temp);
-
-                if (SendThread.mHandler != null) {
-                    Message msg = Message.obtain();
-                    msg.what = 1;
-                    msg.obj = m_Id.getText().toString();
-                    SendThread.mHandler.sendMessage(msg);
-                    m_Id.selectAll();
-                }
-                */
+                intent = new Intent(this, SignUpActivity.class);
+                startActivity(intent);
                 break;
         }
     }
