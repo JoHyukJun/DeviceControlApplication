@@ -25,7 +25,11 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".Deivce_Activity" />
         <activity android:name=".HomeManagerActivity" />
-        <activity android:name=".ListView"></activity>
+
+        <service
+            android:name=".NetworkService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

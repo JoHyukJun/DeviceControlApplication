@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         String tempMsg;
         Vector<deviceItem> tempdev = new Vector<deviceItem>();
+        Intent intentActivty;
 
         switch (v.getId()) {
             case R.id.btnLogIn:
@@ -59,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
                     m_Id.selectAll();
                 }
 
-                intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
+                intentActivty = new Intent(this, HomeActivity.class);
+                startActivity(intentActivty);
                 // 로그인 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
 //                if (id.equals("jo") && pw.equals("0000")) {
