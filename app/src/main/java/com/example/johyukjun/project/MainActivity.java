@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText m_Id, m_Password;
     private Button m_BtnLogIn, m_BtnSignUp;
-    //private ClientThread mClientThread;
+    private ClientThread mClientThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +40,24 @@ public class MainActivity extends AppCompatActivity {
     public void mOnClick(View v) {
         Intent intent;
         String tempMsg;
+        Vector<deviceItem> tempdev = new Vector<deviceItem>();
+
         switch (v.getId()) {
             case R.id.btnLogIn:
                 String id = m_Id.getText().toString();
                 String pw = m_Password.getText().toString();
 
-//                Log.d(TAG, "case btnLogIn");
-//                mClientThread = new ClientThread(mMainHandler);
-//                mClientThread.start();
+                Log.d(TAG, "case btnLogIn");
+                mClientThread = new ClientThread(mMainHandler);
+                mClientThread.start();
 
-//                if (SendThread.mHandler != null) {
-//                    Message msg = Message.obtain();
-//                    msg.what = 1;
-//                    msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
-//                    SendThread.mHandler.sendMessage(msg);
-//                    m_Id.selectAll();
-//                }
+                if (SendThread.mHandler != null) {
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
+                    SendThread.mHandler.sendMessage(msg);
+                    m_Id.selectAll();
+                }
 
                 intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
@@ -78,14 +80,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    private Handler mMainHandler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            switch (msg.what) {
-//                case 1:
-//                    Log.d(TAG, msg.obj.toString());
-//                    break;
-//            }
-//        }
-//    };
+    private Handler mMainHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    Log.d(TAG, msg.obj.toString());
+                    break;
+            }
+        }
+    };
 }

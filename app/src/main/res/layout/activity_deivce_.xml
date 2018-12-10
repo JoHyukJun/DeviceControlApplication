@@ -29,4 +29,12 @@
         android:background="@drawable/button_default"
         android:text="FUNCTION 03"
         android:textColor="@color/White" />
+
+    <LinearLayout
+        android:id="@+id/con"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </LinearLayout>
+
 </LinearLayout>
