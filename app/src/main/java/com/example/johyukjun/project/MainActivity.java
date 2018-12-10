@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText m_Id, m_Password;
     private Button m_BtnLogIn, m_BtnSignUp;
-    //private ClientThread mClientThread;
+    private ClientThread mClientThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,27 +35,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mOnClick(View v) {
-        Intent intent;
+        Intent intentActivty;
+        Intent intentService;
 
         switch (v.getId()) {
             case R.id.btnLogIn:
                 String id = m_Id.getText().toString();
                 String pw = m_Password.getText().toString();
 
-//                Log.d(TAG, "case btnLogIn");
-//                mClientThread = new ClientThread(mMainHandler);
-//                mClientThread.start();
+                Log.d(TAG, "case btnLogIn");
+                mClientThread = new ClientThread(mMainHandler);
+                mClientThread.start();
 
-//                if (SendThread.mHandler != null) {
-//                    Message msg = Message.obtain();
-//                    msg.what = 1;
-//                    msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
-//                    SendThread.mHandler.sendMessage(msg);
-//                    m_Id.selectAll();
-//                }
+                if (SendThread.mHandler != null) {
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
+                    SendThread.mHandler.sendMessage(msg);
+                    m_Id.selectAll();
+                }
 
-                intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
+                intentActivty = new Intent(this, HomeActivity.class);
+                startActivity(intentActivty);
                 // 로그인 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
 //                if (id.equals("jo") && pw.equals("0000")) {
@@ -107,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    private Handler mMainHandler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            switch (msg.what) {
-//                case 1:
-//                    Log.d(TAG, msg.obj.toString());
-//                    break;
-//            }
-//        }
-//    };
+    private Handler mMainHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    Log.d(TAG, msg.obj.toString());
+                    break;
+            }
+        }
+    };
 }
