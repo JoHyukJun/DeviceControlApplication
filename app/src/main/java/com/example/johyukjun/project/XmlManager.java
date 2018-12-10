@@ -29,6 +29,7 @@ public class XmlManager {
         return one;
     }
 
+    // PacketType 1 : login
     public static String MakeLoginXmlStr(String id, String pw) {
         //we create a XmlSerializer in order to write xml data
         String returnStr = "";
@@ -116,6 +117,21 @@ public class XmlManager {
         return returnStr;
     }
 
+    // PacketType 2 : logout
+
+    // PacketType 3 : Sign in
+
+    // PacketType 4 : Register Device
+
+    // PacketType 6 : Remove Device
+
+    // PacketType 7 : Request Device List
+
+    // PacketType 8 : Device Select (have to receive Button or TextView UI
+
+    // PacketType 9 : Control Device (send string type ex. LED_ON)
+
+    // PacketType 10 : Change User Info
 
     public static String TempXmlStr(String id, String pw) {
         //we create a XmlSerializer in order to write xml data
