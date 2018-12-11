@@ -15,7 +15,8 @@ import java.util.logging.LogRecord;
 
 public class ClientThread extends Thread {
     public static final int serverPort = 33265;
-    public static final String serverIp = "39.118.142.34";
+    //public static final String serverIp = "39.118.142.34";
+    public static final String serverIp = "13.125.221.145";
 
     private Handler mMainHandler;
 

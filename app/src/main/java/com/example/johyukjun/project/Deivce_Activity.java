@@ -1,6 +1,7 @@
 package com.example.johyukjun.project;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -15,32 +16,29 @@ import android.widget.Toast;
 
 public class Deivce_Activity extends AppCompatActivity {
 
-    int idindex = 1;
+    int idindex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deivce_);
 
-//        LayoutInflater mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//
-//        LinearLayout mRootlinear = (LinearLayout) findViewById(R.id.con);
-//        mInflater.inflate(R.layout.sub, mRootlinear, true);
+        idindex = 1;
+
+        // 패킷을 받아서
 
         // 버튼에 관한 디바이스일 경우
-        if(true)
+        if(false)
         {
             CreateButton();
         }
         // 거리측정기인 경우 텍스트뷰를 만들고 주기적으로 업데이트 해야 함
-        else if(false)
+        else
         {
-
-
+            CreateTextView();
         }
     }
 
-    private void CreateButton()
-    {
+    private void CreateButton() {
 
         final LinearLayout lm = (LinearLayout) findViewById(R.id.con);
 
@@ -92,6 +90,34 @@ public class Deivce_Activity extends AppCompatActivity {
             lm.addView(ll);
 
             idindex++;
+    }
+
+    private void CreateTextView() {
+
+        final LinearLayout lm = (LinearLayout) findViewById(R.id.con);
+
+        // linearLayout params 정의
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+
+        // LinearLayout 생성
+        LinearLayout ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.HORIZONTAL);
+
+
+        // TextView 생성
+        TextView tvAge = new TextView(this);
+        tvAge.setText("값");
+        tvAge.setLayoutParams(params);
+        tvAge.setTextColor(getResources().getColor(R.color.White));
+        tvAge.setTextSize(50);
+        ll.addView(tvAge);
+
+        //LinearLayout 정의된거 add
+        lm.addView(ll);
+
+        idindex++;
     }
 
 }
