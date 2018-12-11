@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         mClientThread = new ClientThread(mMainHandler);
         mClientThread.start();
-
     }
 
     public void mOnClick(View v) {
@@ -52,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d(TAG, "case btnLogIn");
 
+                if(mClientThread == null) {
+                    mClientThread = new ClientThread(mMainHandler);
+                    mClientThread.start();
+                }
 
                 if (SendThread.mHandler != null) {
                     Message msg = Message.obtain();
