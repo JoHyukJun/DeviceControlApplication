@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         m_Id = (EditText) findViewById(R.id.editId);
         m_Password = (EditText) findViewById(R.id.editPassword);
 
+        mClientThread = new ClientThread(mMainHandler);
+        mClientThread.start();
 
     }
 
@@ -49,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 String pw = m_Password.getText().toString();
 
                 Log.d(TAG, "case btnLogIn");
-                mClientThread = new ClientThread(mMainHandler);
-                mClientThread.start();
+
 
                 if (SendThread.mHandler != null) {
                     Message msg = Message.obtain();
@@ -60,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     m_Id.selectAll();
                 }
 
-                intentActivty = new Intent(this, HomeActivity.class);
-                startActivity(intentActivty);
+//                intentActivty = new Intent(this, HomeActivity.class);
+//                startActivity(intentActivty);
                 // 로그인 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
 //                if (id.equals("jo") && pw.equals("0000")) {

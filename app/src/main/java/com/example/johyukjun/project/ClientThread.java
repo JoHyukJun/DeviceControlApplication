@@ -102,6 +102,7 @@ class SendThread extends Thread {
                         try {
                             String tempStr = (String) msg.obj;
                             mOutStream.write(tempStr.getBytes());
+                            mOutStream.flush();
                             mClientThread.doPrintln("SEND MESSAGE" + tempStr);
                         }
                         catch (IOException e) {
