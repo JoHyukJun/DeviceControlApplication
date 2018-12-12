@@ -125,6 +125,12 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 break;
 
+            case R.id.btnChangeUserInfo:
+                intent = new Intent(this, ChangeUserInfoActivity.class);
+                startActivity(intent);
+
+                break;
+
             case R.id.btnLogout:
                 if (SendThread.mHandler != null) {
                     Message msg = Message.obtain();
