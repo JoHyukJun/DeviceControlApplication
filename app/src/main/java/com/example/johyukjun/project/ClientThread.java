@@ -90,6 +90,14 @@ public class ClientThread extends Thread {
 
         return;
     }
+
+    public void doPrintOutln(String inStr) {
+        Message tempMsg = Message.obtain();
+        tempMsg.what = 2;
+        tempMsg.obj = inStr;
+
+        mMainHandler.sendMessage(tempMsg);
+    }
 }
 
 
@@ -164,10 +172,10 @@ class RecvThread extends Thread {
                 if(nbytes > 0) {
                     String tempStr = new String(buf, 0, nbytes);
                     mRecvData = tempStr;
-                    mClientThread.doPrintln("*" + tempStr);
+                    mClientThread.doPrintOutln(tempStr);
                 }
                 else {
-                    mClientThread.doPrintln("SERVER DISCONNECTED");
+                    mClientThread.doPrintOutln("SERVER DISCONNECTED");
 
                     if (SendThread.mHandler != null) {
                         Message msg = Message.obtain();

@@ -72,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 1;
                     msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
                     SendThread.mHandler.sendMessage(msg);
+
                 }
+
+                Log.d(TAG, "받은 데이터 구현!!!" + recvData);
 
                 while(true) {
                     if(recvData == null)
@@ -105,15 +108,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case 2:
+                    recvData = msg.obj.toString();
+
+                    Log.d(TAG, "받은 데이터 구현!!!" + recvData);
+
+                    break;
+
                 case 1:
                     fullData = msg.obj.toString();
 
-                    if (fullData != null && fullData != "") {
-                        if (fullData.indexOf("*<?") > -1)
-                            recvData = fullData.substring(fullData.indexOf("*<?") + 1);
-                    }
                     Log.d(TAG, "FULL DATA" + fullData);
-                    Log.d(TAG, "받은 데이터 구현!!!" + recvData);
                     break;
                 case 0:
                     fullData = msg.obj.toString();
