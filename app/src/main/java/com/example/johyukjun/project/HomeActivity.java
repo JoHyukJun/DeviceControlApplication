@@ -72,8 +72,8 @@ public class HomeActivity extends AppCompatActivity {
             msg.obj = XmlManager.MakeReqDeviceListXmlStr(MainActivity.GlobalID);
             SendThread.mHandler.sendMessage(msg);
 
-            //Log.d(TAG, MainActivity.mClientThread.RecvData);
 
+            Log.d(TAG, MainActivity.xmlData);
         }
     }
 
@@ -122,6 +122,17 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case R.id.btnLogout:
+                if (SendThread.mHandler != null) {
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = XmlManager.MakeLogoutXmlStr(MainActivity.GlobalID);
+                    SendThread.mHandler.sendMessage(msg);
+
+                    MainActivity.GlobalID = "";
+
+                    intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
     }
