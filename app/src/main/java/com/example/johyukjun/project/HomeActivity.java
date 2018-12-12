@@ -86,20 +86,24 @@ public class HomeActivity extends AppCompatActivity {
 
                 deviceItem tempItem = new deviceItem();
 
-                if (serial.length() != 0) {
-                    m_Device.add("별명");
-                    m_SerialNumber.setText("");
-                    tempItem.SetSerialNum(serial);
-                    m_Adapter.notifyDataSetChanged();
+                intent = new Intent(this, HomeManagerActivity.class);
+                startActivity(intent);
 
-
-                    if (SendThread.mHandler != null) {
-                        Message msg = Message.obtain();
-                        msg.what = 1;
-                        msg.obj = XmlManager.MakeDeviceXmlStr(tempItem.GetNickName(), tempItem.GetSerialNum(), tempItem.GetAlias());
-                        SendThread.mHandler.sendMessage(msg);
-                    }
-                }
+//                if (serial.length() != 0) {
+//                    m_Device.add("별명");
+//                    m_SerialNumber.setText("");
+//                    tempItem.SetSerialNum(serial);
+//                    m_Adapter.notifyDataSetChanged();
+//
+//
+//
+//                    if (SendThread.mHandler != null) {
+//                        Message msg = Message.obtain();
+//                        msg.what = 1;
+//                        msg.obj = XmlManager.MakeDeviceXmlStr(tempItem.GetNickName(), tempItem.GetSerialNum(), tempItem.GetAlias());
+//                        SendThread.mHandler.sendMessage(msg);
+//                    }
+//                }
                 break;
 
             case R.id.btnRemoveDevice:
@@ -119,6 +123,12 @@ public class HomeActivity extends AppCompatActivity {
                     intent = new Intent(this, Deivce_Activity.class);
                     startActivity(intent);
                 }
+                break;
+
+            case R.id.btnChangeUserInfo:
+                intent = new Intent(this, ChangeUserInfoActivity.class);
+                startActivity(intent);
+
                 break;
 
             case R.id.btnLogout:
@@ -144,28 +154,21 @@ public class HomeActivity extends AppCompatActivity {
 
 class deviceItem {
     private String serialNum;
-    private String nickName;
     private String alias;
 
     public deviceItem() {
         serialNum = "";
-        nickName = "";
         alias = "";
 
     }
 
-    public deviceItem(String inSerialNum, String inNickName, String inAlias) {
+    public deviceItem(String inSerialNum, String inAlias) {
         this.serialNum = inSerialNum;
-        this.nickName = inNickName;
         this.alias = inAlias;
     }
 
     public String GetSerialNum() {
         return serialNum;
-    }
-
-    public String GetNickName() {
-        return nickName;
     }
 
     public String GetAlias() {
@@ -178,8 +181,8 @@ class deviceItem {
         return;
     }
 
-    public void SetNickName(String inNickName) {
-        nickName = inNickName;
+    public void SetAlias(String inAlias) {
+        alias = inAlias;
 
         return;
     }

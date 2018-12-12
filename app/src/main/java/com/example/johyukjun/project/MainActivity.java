@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             msg.obj = XmlManager.MakeLoginXmlStr("User1", "1111");
             SendThread.mHandler.sendMessage(msg);
         }
-
     }
 
 
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                     msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
                     SendThread.mHandler.sendMessage(msg);
                 }
-                    //Log.d(TAG, recvData);
 
                 while(true) {
                     if(recvData == null)
@@ -117,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     fullData = msg.obj.toString();
 
                     if (fullData != null && fullData != "") {
-                        if (fullData.indexOf("SEND") == -1)
+                        if (fullData.indexOf("*<?") > -1)
                             recvData = fullData.substring(fullData.indexOf("*<?") + 1);
                     }
                     Log.d(TAG, "FULL DATA" + fullData);
