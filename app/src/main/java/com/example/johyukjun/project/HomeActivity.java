@@ -24,7 +24,6 @@ public class HomeActivity extends AppCompatActivity {
     ArrayAdapter<String> m_Adapter;
     ListView m_ListView;
     Button m_BtnAdd, m_BtnRemove;
-    EditText m_SerialNumber;
 
     // create할때 받은 디바이스 리스트 패킷으로 디바이스 추가와 생성 실행
 
@@ -56,7 +55,6 @@ public class HomeActivity extends AppCompatActivity {
         m_BtnAdd = (Button) findViewById(R.id.btnAddDevice);
         m_BtnRemove = (Button) findViewById(R.id.btnRemoveDevice);
 
-        m_SerialNumber = (EditText) findViewById(R.id.editSerialNumber);
 
         m_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,8 +70,6 @@ public class HomeActivity extends AppCompatActivity {
             msg.obj = XmlManager.MakeReqDeviceListXmlStr(MainActivity.GlobalID);
             SendThread.mHandler.sendMessage(msg);
 
-
-            Log.d(TAG, MainActivity.recvData);
         }
     }
 
@@ -82,7 +78,6 @@ public class HomeActivity extends AppCompatActivity {
 
         switch (v.getId()) {
             case R.id.btnAddDevice:
-                String serial = m_SerialNumber.getText().toString();
 
                 deviceItem tempItem = new deviceItem();
 
