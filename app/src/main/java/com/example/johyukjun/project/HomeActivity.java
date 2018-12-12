@@ -68,18 +68,19 @@ public class HomeActivity extends AppCompatActivity {
             msg.obj = XmlManager.MakeReqDeviceListXmlStr(MainActivity.GlobalID);
             SendThread.mHandler.sendMessage(msg);
 
+
         }
 
-        if (MainActivity.recvData != null) {
-            deviceItem tempItem = new deviceItem();
-
-            String [] devarr;
-
-            devarr = XmlManager.ParseDeviceListXmlStr(MainActivity.recvData);
-            m_Device.add(devarr[1]);
-            tempItem.SetSerialNum(devarr[0]);
-            m_Adapter.notifyDataSetChanged();
-        }
+//        if (MainActivity.recvData != null) {
+//            deviceItem tempItem = new deviceItem();
+//
+//            String [] devarr;
+//
+//            devarr = XmlManager.ParseDeviceListXmlStr(MainActivity.recvData);
+//            m_Device.add(devarr[1]);
+//            tempItem.SetSerialNum(devarr[0]);
+//            m_Adapter.notifyDataSetChanged();
+//        }
     }
 
     public void mHomeOnClick(View v) {
