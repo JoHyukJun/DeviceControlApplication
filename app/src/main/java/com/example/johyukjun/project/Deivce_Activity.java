@@ -32,7 +32,7 @@ public class Deivce_Activity extends AppCompatActivity {
         // 패킷을 받아서
 
         // 버튼에 관한 디바이스일 경우
-        if(false)
+        if(true)
         {
             CreateButton();
         }
@@ -72,28 +72,28 @@ public class Deivce_Activity extends AppCompatActivity {
         rl.addView(tvProdc);
 
         // 버튼 생성
-        final Button btn = new Button(this);
+        final Button ledonbtn = new Button(this);
 
         RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
         params2.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         params2.addRule(RelativeLayout.BELOW, tvProdc.getId());
         params2.width = 400;
         // setId 버튼에 대한 키값
-        btn.setId(R.id.device_button);
-        btn.setText("Apply");
+        ledonbtn.setId(R.id.device_ledon_button);
+        ledonbtn.setText("LED ON");
 
 
-        btn.setLayoutParams(params2);
+        ledonbtn.setLayoutParams(params2);
 
-        btn.setBackground(getResources().getDrawable(R.drawable.button_default));
-        btn.setMinimumWidth(0);
+        ledonbtn.setBackground(getResources().getDrawable(R.drawable.button_default));
+        ledonbtn.setMinimumWidth(0);
         //btn.setHeight(WRAP_CONTENT);
-        btn.setTextColor(getResources().getColor(R.color.White));
-        btn.setTextSize(20);
+        ledonbtn.setTextColor(getResources().getColor(R.color.White));
+        ledonbtn.setTextSize(20);
 
         final int position = 1;
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        ledonbtn.setOnClickListener(new View.OnClickListener() {
 
             // 이 안에 클릭했을 경우 발생하는 이벤트
             public void onClick(View v) {
@@ -105,9 +105,44 @@ public class Deivce_Activity extends AppCompatActivity {
         });
 
         //버튼 add
-        rl.addView(btn);
+        rl.addView(ledonbtn);
+
+// 버튼 생성
+        final Button ledoffbtn = new Button(this);
+
+        RelativeLayout.LayoutParams params2_1 = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+        params2_1.topMargin = 150;
+        params2_1.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        params2_1.addRule(RelativeLayout.BELOW, ledonbtn.getId());
+        params2_1.width = 400;
+        // setId 버튼에 대한 키값
+        ledoffbtn.setId(R.id.device_ledoff_button);
+        ledoffbtn.setText("LED OFF");
 
 
+        ledoffbtn.setLayoutParams(params2_1);
+
+        ledoffbtn.setBackground(getResources().getDrawable(R.drawable.button_default));
+        ledoffbtn.setMinimumWidth(0);
+        //btn.setHeight(WRAP_CONTENT);
+        ledoffbtn.setTextColor(getResources().getColor(R.color.White));
+        ledoffbtn.setTextSize(20);
+
+        final int position_2 = 1;
+
+        ledoffbtn.setOnClickListener(new View.OnClickListener() {
+
+            // 이 안에 클릭했을 경우 발생하는 이벤트
+            public void onClick(View v) {
+                Log.d("log", "position :" + position_2);
+                Toast.makeText(getApplicationContext(), "클릭한 position:" + position_2, Toast.LENGTH_LONG).show();
+                // LED_ON과 같은 packet 만들어서 보내기
+            }
+
+        });
+
+        //버튼 add
+        rl.addView(ledoffbtn);
 
 
         final Button btnback = new Button(this);
@@ -115,7 +150,7 @@ public class Deivce_Activity extends AppCompatActivity {
         RelativeLayout.LayoutParams params3 = new RelativeLayout.LayoutParams(180, WRAP_CONTENT);
         params3.topMargin = 300;
         params3.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        params3.addRule(RelativeLayout.BELOW, btn.getId());
+        params3.addRule(RelativeLayout.BELOW, ledoffbtn.getId());
         params3.width = 400;
         // setId 버튼에 대한 키값
         btnback.setId(R.id.back_button);

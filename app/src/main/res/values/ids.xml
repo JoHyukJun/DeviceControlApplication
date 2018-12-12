@@ -3,6 +3,7 @@
     <item type="id" name="R_layout"/>
     <item type="id" name="device_text_view" />
     <item type="id" name="device_tvValue"/>
-    <item type="id" name="device_button" />
+    <item type="id" name="device_ledon_button" />
+    <item type="id" name="device_ledoff_button" />
     <item type="id" name="back_button" />
 </resources>

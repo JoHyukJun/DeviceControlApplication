@@ -365,6 +365,138 @@ public class XmlManager {
         return returnStr;
     }
 
+
+
+    public static Vector<String[]> ParseDBScreenInfoXmlStr(String xmlStr) {
+        Vector<String[]>returnStr = new Vector<>();
+
+
+        XmlPullParserFactory parserFactory;
+        try {
+            parserFactory = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = parserFactory.newPullParser() ;
+
+            InputStream inStream = new ByteArrayInputStream(xmlStr.getBytes());
+            parser.setInput(inStream, "UTF-8");
+
+            int eventType = parser.getEventType();
+            String endTag;
+            String text;
+            String [] serverReply = new String[3];
+            String packetType = "";
+            int count = 0;
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType)
+                {
+                    case XmlPullParser.START_DOCUMENT:
+                        break;
+                    case XmlPullParser.START_TAG:
+                        if (parser.getName().equals("IoTPacket")) {
+                            packetType = parser.getAttributeValue(null, "PacketType");
+                        }
+                        else if (parser.getName().equals("ServerMsg")) {
+//                            serverReply = parser.getAttributeValue(null,"MSG");
+//                            returnStr = serverReply;
+                        }
+                        else if(parser.getName().equals("ScreenData")){
+                            count = parser.getNamespaceCount(parser.getDepth());
+                        }
+                        else if(parser.getName().equals("Button")){
+                            String [] tempStr = new String[4];
+                            tempStr[0] = parser.getAttributeValue(null,"x");
+                            tempStr[1] = parser.getAttributeValue(null, "y");
+                            tempStr[2] = parser.getAttributeValue(null, "name");
+                            tempStr[3] = parser.getAttributeValue(null, "ctrlMsg");
+                            returnStr.add(tempStr);
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        break;
+                    case XmlPullParser.TEXT:
+                        //returnStr = parser.getText();
+                        break;
+                    default:
+                        break;
+                }
+                try {
+                    eventType = parser.next();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+
+        return returnStr;
+    }
+
+    public static Vector<String[]> ParseSVScreenInfoXmlStr(String xmlStr) {
+        Vector<String[]>returnStr = new Vector<>();
+
+
+        XmlPullParserFactory parserFactory;
+        try {
+            parserFactory = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = parserFactory.newPullParser() ;
+
+            InputStream inStream = new ByteArrayInputStream(xmlStr.getBytes());
+            parser.setInput(inStream, "UTF-8");
+
+            int eventType = parser.getEventType();
+            String endTag;
+            String text;
+            String [] serverReply = new String[3];
+            String packetType = "";
+            String data = "";
+            String data2 = "";
+            int count = 0;
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType)
+                {
+                    case XmlPullParser.START_DOCUMENT:
+                        break;
+                    case XmlPullParser.START_TAG:
+                        if (parser.getName().equals("IoTPacket")) {
+                            packetType = parser.getAttributeValue(null, "PacketType");
+                        }
+                        else if (parser.getName().equals("ServerMsg")) {
+//                            serverReply = parser.getAttributeValue(null,"MSG");
+//                            returnStr = serverReply;
+                        }
+                        else if(parser.getName().equals("Data")){
+                            count = parser.getNamespaceCount(parser.getDepth());
+                        }
+                        else if(parser.getName().equals("ScreenInfo")){
+                            data = parser.getAttributeValue(null,"data");
+                            return XmlManager.ParseDBScreenInfoXmlStr(data);
+                        }
+                        else if(parser.getName().equals("Status")){
+                            data2 = parser.getAttributeValue(null,"data");
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        break;
+                    case XmlPullParser.TEXT:
+                        //returnStr = parser.getText();
+                        break;
+                    default:
+                        break;
+                }
+                try {
+                    eventType = parser.next();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+
+        return returnStr;
+    }
     // PacketType 2 : logout
 
     // PacketType 3 : Sign in
