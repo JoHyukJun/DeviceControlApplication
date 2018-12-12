@@ -35,11 +35,9 @@ public class HomeActivity extends AppCompatActivity {
 
         // deviceitem타입을 String 타입으로 변경함
         m_Device = new ArrayList<String>();
-        m_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, m_Device)
-        {
+        m_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, m_Device) {
             @Override
-            public View getView(int position, View convertView, ViewGroup parent)
-            {
+            public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
                 tv.setTextColor(getResources().getColor(R.color.White));
@@ -55,8 +53,6 @@ public class HomeActivity extends AppCompatActivity {
 
         m_BtnAdd = (Button) findViewById(R.id.btnAddDevice);
         m_BtnRemove = (Button) findViewById(R.id.btnRemoveDevice);
-
-        m_SerialNumber = (EditText) findViewById(R.id.editSerialNumber);
 
         m_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,16 +71,27 @@ public class HomeActivity extends AppCompatActivity {
 
             Log.d(TAG, MainActivity.recvData);
         }
+
+        if (MainActivity.recvData != null) {
+            deviceItem tempItem = new deviceItem();
+
+            String [] devarr;
+
+            devarr = XmlManager.ParseDeviceListXmlStr(MainActivity.recvData);
+            m_Device.add(devarr[1]);
+            m_SerialNumber.setText(devarr[0]);
+            tempItem.SetSerialNum(devarr[0]);
+            m_Adapter.notifyDataSetChanged();
+        }
     }
 
-    public void mHomeOnClick (View v) {
+    public void mHomeOnClick(View v) {
         Intent intent;
 
         switch (v.getId()) {
             case R.id.btnAddDevice:
-                String serial = m_SerialNumber.getText().toString();
+                //String serial = m_SerialNumber.getText().toString();
 
-                deviceItem tempItem = new deviceItem();
 
                 intent = new Intent(this, HomeManagerActivity.class);
                 startActivity(intent);
@@ -139,7 +146,7 @@ public class HomeActivity extends AppCompatActivity {
                     SendThread.mHandler.sendMessage(msg);
 
                     // 로그아웃 패킷 받았을 시
-                    if(true) {
+                    if (true) {
                         MainActivity.GlobalID = "";
                     }
                     intent = new Intent(this, MainActivity.class);
@@ -148,7 +155,6 @@ public class HomeActivity extends AppCompatActivity {
                 break;
         }
     }
-
 }
 
 
@@ -187,3 +193,4 @@ class deviceItem {
         return;
     }
 }
+

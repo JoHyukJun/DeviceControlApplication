@@ -227,6 +227,64 @@ public class XmlManager {
         return returnStr;
     }
 
+    public static String[] ParseDeviceListXmlStr(String xmlStr) {
+        String[] returnStr = new String[3];
+
+        XmlPullParserFactory parserFactory;
+        try {
+            parserFactory = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = parserFactory.newPullParser() ;
+
+            InputStream inStream = new ByteArrayInputStream(xmlStr.getBytes());
+            parser.setInput(inStream, "UTF-8");
+
+            int eventType = parser.getEventType();
+            String endTag;
+            String text;
+            String [] serverReply = new String[3];
+            String packetType = "";
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType)
+                {
+                    case XmlPullParser.START_DOCUMENT:
+                        break;
+                    case XmlPullParser.START_TAG:
+                        if (parser.getName().equals("IoTPacket")) {
+                            packetType = parser.getAttributeValue(null, "PacketType");
+                        }
+                        else if (parser.getName().equals("ServerMsg")) {
+//                            serverReply = parser.getAttributeValue(null,"MSG");
+//                            returnStr = serverReply;
+                        }
+                        else if(parser.getName().equals("Data")){
+                        }
+                        else if(parser.getName().equals("Device")){
+                            returnStr[0] = parser.getAttributeValue(null,"Serial");
+                            returnStr[1] = parser.getAttributeValue(null, "Alias");
+                            returnStr[2] = parser.getAttributeValue(null, "Connect");
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        break;
+                    case XmlPullParser.TEXT:
+                        //returnStr = parser.getText();
+                        break;
+                    default:
+                        break;
+                }
+                try {
+                    eventType = parser.next();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+
+        return returnStr;
+    }
 
     public static String MakeLogoutXmlStr(String id) {
         //we create a XmlSerializer in order to write xml data
