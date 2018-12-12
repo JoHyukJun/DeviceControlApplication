@@ -115,6 +115,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 if (selPos != ListView.INVALID_POSITION) {
                     intent = new Intent(this, Deivce_Activity.class);
+                    intent.putExtra("serial", selItem.GetSerialNum());
                     startActivity(intent);
                 }
                 break;
