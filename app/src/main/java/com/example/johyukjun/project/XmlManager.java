@@ -193,6 +193,40 @@ public class XmlManager {
         return returnStr;
     }
 
+    public static String MakeReqDeviceListXmlStr(String id) {
+        //we create a XmlSerializer in order to write xml data
+        String returnStr = "";
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        XmlSerializer serializer = Xml.newSerializer();
+
+        try {
+            //we set the FileOutputStream as output for the serializer, using UTF-8 encoding
+            serializer.setOutput(stream, "UTF-8");
+            //Write <?xml declaration with encoding (if encoding not null) and standalone flag (if standalone not null)
+            serializer.startDocument(null, true);
+            //set indentation option
+            serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+
+            serializer.startTag(null,"IoTPacket");
+            serializer.attribute(null, "PacketType", "7");
+
+            serializer.startTag(null,"ReqDevListClient");
+            serializer.attribute(null, "ID", id);
+            serializer.endTag(null,"ReqDevListClient");
+
+            serializer.endTag(null,"IoTPacket");
+
+            serializer.endDocument();
+            //write xml data into the OutputStream
+            serializer.flush();
+            returnStr = new String(stream.toByteArray());
+            stream.close();
+        } catch (Exception e) {
+            Log.e("Exception", "error occurred");
+        }
+        return returnStr;
+    }
+
     // PacketType 2 : logout
 
     // PacketType 3 : Sign in

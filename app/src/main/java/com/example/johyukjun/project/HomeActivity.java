@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
+    private static final String TAG = HomeActivity.class.getSimpleName();
     ArrayList<String> m_Device;
     ArrayAdapter<String> m_Adapter;
     ListView m_ListView;
@@ -43,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
                 tv.setTextColor(getResources().getColor(R.color.White));
                 return view;
             }
+
         };
 
         m_ListView = (ListView) findViewById(R.id.listDevice);
@@ -61,6 +64,17 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+        //디바이스 리스트 요청
+        if (SendThread.mHandler != null) {
+            Message msg = Message.obtain();
+            msg.what = 1;
+            msg.obj = XmlManager.MakeReqDeviceListXmlStr(MainActivity.GlobalID);
+            SendThread.mHandler.sendMessage(msg);
+
+            //Log.d(TAG, MainActivity.mClientThread.RecvData);
+
+        }
     }
 
     public void mHomeOnClick (View v) {

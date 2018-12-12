@@ -45,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
 
-                // 등록 버튼
+                // 등록 버튼 (이거 나중에 위에 if 문 안으로 넣아야함)
                 intentActivty = new Intent(this, MainActivity.class);
                 startActivity(intentActivty);
 

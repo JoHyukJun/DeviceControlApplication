@@ -21,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText m_Id, m_Password;
     private Button m_BtnLogIn, m_BtnSignUp;
-    private ClientThread mClientThread;
+    public static ClientThread mClientThread;
+
+    public static String GlobalID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,17 @@ public class MainActivity extends AppCompatActivity {
                     msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
                     SendThread.mHandler.sendMessage(msg);
 
+                    Log.d(TAG, mClientThread.RecvData);
+
+                    if (XmlManager.ParseLoginXmlStr(mClientThread.RecvData) == "complete") {
+                        GlobalID = id;
+
+                        intentActivty = new Intent(this, HomeActivity.class);
+                        startActivity(intentActivty);
+                    }
+
                     m_Id.selectAll();
                 }
-
-                intentActivty = new Intent(this, HomeActivity.class);
-                startActivity(intentActivty);
                 // 디바이스 선택 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
                 break;
