@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = HomeActivity.class.getSimpleName();
-    public static ArrayList<String> m_Device;
-    public static ArrayAdapter<String> m_Adapter;
+    public static ArrayList<deviceItem> m_Device;
+    public static ArrayAdapter<deviceItem> m_Adapter;
     ListView m_ListView;
     Button m_BtnAdd, m_BtnRemove;
 
@@ -33,8 +33,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // deviceitem타입을 String 타입으로 변경함
-        m_Device = new ArrayList<String>();
-        m_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, m_Device) {
+        m_Device = new ArrayList<deviceItem>();
+        m_Adapter = new ArrayAdapter<deviceItem>(this, android.R.layout.simple_list_item_single_choice, m_Device) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -68,17 +68,6 @@ public class HomeActivity extends AppCompatActivity {
             msg.obj = XmlManager.MakeReqDeviceListXmlStr(MainActivity.GlobalID);
             SendThread.mHandler.sendMessage(msg);
         }
-
-//        if (MainActivity.recvData != null) {
-//            deviceItem tempItem = new deviceItem();
-//
-//            String [] devarr;
-//
-//            devarr = XmlManager.ParseDeviceListXmlStr(MainActivity.recvData);
-//            m_Device.add(devarr[1]);
-//            tempItem.SetSerialNum(devarr[0]);
-//            m_Adapter.notifyDataSetChanged();
-//        }
     }
 
     public void mHomeOnClick(View v) {
@@ -90,26 +79,20 @@ public class HomeActivity extends AppCompatActivity {
                 intent = new Intent(this, HomeManagerActivity.class);
                 startActivity(intent);
 
-//                if (serial.length() != 0) {
-//                    m_Device.add("별명");
-//                    m_SerialNumber.setText("");
-//                    tempItem.SetSerialNum(serial);
-//                    m_Adapter.notifyDataSetChanged();
-//
-//
-//
-//                    if (SendThread.mHandler != null) {
-//                        Message msg = Message.obtain();
-//                        msg.what = 1;
-//                        msg.obj = XmlManager.MakeDeviceXmlStr(tempItem.GetNickName(), tempItem.GetSerialNum(), tempItem.GetAlias());
-//                        SendThread.mHandler.sendMessage(msg);
-//                    }
-//                }
                 break;
 
             case R.id.btnRemoveDevice:
                 int pos;
                 pos = m_ListView.getCheckedItemPosition();
+                deviceItem selc = m_Device.get(pos);
+
+                if (SendThread.mHandler != null) {
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = XmlManager.MakeRvItemXmlStr(MainActivity.GlobalID, selc.GetSerialNum());
+                    SendThread.mHandler.sendMessage(msg);
+                }
+
                 if (pos != ListView.INVALID_POSITION) {
                     m_Device.remove(pos);
                     m_ListView.clearChoices();
@@ -120,6 +103,16 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.btnSelectDevice:
                 int selPos;
                 selPos = m_ListView.getCheckedItemPosition();
+                deviceItem selItem = m_Device.get(selPos);
+
+                if (SendThread.mHandler != null) {
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = XmlManager.MakeSelDeviceXmlStr(MainActivity.GlobalID, selItem.GetSerialNum());
+                    SendThread.mHandler.sendMessage(msg);
+                }
+
+
                 if (selPos != ListView.INVALID_POSITION) {
                     intent = new Intent(this, Deivce_Activity.class);
                     startActivity(intent);
