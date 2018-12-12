@@ -30,6 +30,7 @@ public class ClientThread extends Thread {
 
     Socket m_Sock;
 
+    boolean flag = true;
 
     public ClientThread() {
         m_Sock = null;
@@ -46,7 +47,7 @@ public class ClientThread extends Thread {
         try {
             m_Sock = new Socket(serverIp, serverPort);
 
-            doPrintln("SERVER CONEETED");
+            //doPrintln("SERVER CONEETED");
 
             SendThread sendThread = new SendThread(this, m_Sock.getOutputStream());
             RecvThread recvThread = new RecvThread(this, m_Sock.getInputStream());
@@ -79,6 +80,7 @@ public class ClientThread extends Thread {
     }
 
 
+    // 메시지에 쓰는 부분
     public void doPrintln(String inStr) {
         Message tempMsg = Message.obtain();
         tempMsg.what = 1;

@@ -128,8 +128,10 @@ public class HomeActivity extends AppCompatActivity {
                     msg.obj = XmlManager.MakeLogoutXmlStr(MainActivity.GlobalID);
                     SendThread.mHandler.sendMessage(msg);
 
-                    MainActivity.GlobalID = "";
-
+                    // 로그아웃 패킷 받았을 시
+                    if(true) {
+                        MainActivity.GlobalID = "";
+                    }
                     intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 }

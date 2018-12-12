@@ -42,7 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         mClientThread = new ClientThread(mMainHandler);
         mClientThread.start();
+
+        if (SendThread.mHandler != null) {
+            Message msg = Message.obtain();
+            msg.what = 1;
+            msg.obj = XmlManager.MakeLoginXmlStr("User1", "1111");
+            SendThread.mHandler.sendMessage(msg);
+        }
     }
+
+
+
 
     public void mOnClick(View v) {
         Intent intent;
@@ -62,25 +72,31 @@ public class MainActivity extends AppCompatActivity {
                     mClientThread.start();
                 }
 
+                // 첫바퀴에는 recvData가 null이어서 돌지 않음
                 if (SendThread.mHandler != null) {
                     Message msg = Message.obtain();
                     msg.what = 1;
                     msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
                     SendThread.mHandler.sendMessage(msg);
-
-                    Log.d(TAG, recvData);
-
-                    if (XmlManager.ParseLoginXmlStr(recvData) == "fail") {
-                        GlobalID = id;
-
-                        intentActivty = new Intent(this, HomeActivity.class);
-                        startActivity(intentActivty);
-                    }
-//                    intentActivty = new Intent(this, HomeActivity.class);
-//                    startActivity(intentActivty);
-
-                    m_Id.selectAll();
                 }
+                    //Log.d(TAG, recvData);
+
+                while(true) {
+                    if(recvData == null)
+                    {
+                        break;
+                    }
+                    else {
+                        if (XmlManager.ParseLoginXmlStr(recvData).equals("done")) {
+                            GlobalID = id;
+                            intentActivty = new Intent(this, HomeActivity.class);
+                            startActivity(intentActivty);
+                        }
+                        break;
+                    }
+                }
+                    m_Id.selectAll();
+
                 // 디바이스 선택 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
                 break;
@@ -91,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
     @SuppressLint("HandlerLeak")
     private Handler mMainHandler = new Handler() {
         @Override
@@ -102,12 +117,15 @@ public class MainActivity extends AppCompatActivity {
 
                     if (fullData != null && fullData != "") {
                         if (fullData.indexOf("SEND") == -1)
-                        recvData = fullData.substring(fullData.indexOf("*<?") + 1);
+                            recvData = fullData.substring(fullData.indexOf("*<?") + 1);
 
                     }
 
                     Log.d(TAG, fullData);
                     Log.d(TAG, "받은 데이터 구현!!!" + recvData);
+                    break;
+                case 0:
+                    fullData = msg.obj.toString();
                     break;
             }
         }
