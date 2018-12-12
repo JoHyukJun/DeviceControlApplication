@@ -30,8 +30,6 @@ public class ClientThread extends Thread {
 
     Socket m_Sock;
 
-    public String RecvData = "";
-
 
     public ClientThread() {
         m_Sock = null;
@@ -56,8 +54,6 @@ public class ClientThread extends Thread {
 
             sendThread.start();
             recvThread.start();
-
-            RecvData = recvThread.GetRecvData();
 
 
             //
@@ -143,7 +139,7 @@ class SendThread extends Thread {
 class RecvThread extends Thread {
     private ClientThread mClientThread;
     private InputStream mInStream;
-    private String mRecvData;
+    public static String mRecvData;
 
     public RecvThread(ClientThread clientThread, InputStream inputStream) {
         mClientThread = clientThread;
