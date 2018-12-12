@@ -230,7 +230,7 @@ public class XmlManager {
 
     public static Vector<String[]> ParseDeviceListXmlStr(String xmlStr) {
         Vector<String[]>returnStr = new Vector<>();
-        String [] tempStr = new String[3];
+
 
         XmlPullParserFactory parserFactory;
         try {
@@ -264,6 +264,7 @@ public class XmlManager {
                             count = parser.getNamespaceCount(parser.getDepth());
                         }
                         else if(parser.getName().equals("Device")){
+                            String [] tempStr = new String[3];
                             tempStr[0] = parser.getAttributeValue(null,"Serial");
                             tempStr[1] = parser.getAttributeValue(null, "Alias");
                             tempStr[2] = parser.getAttributeValue(null, "Connect");
