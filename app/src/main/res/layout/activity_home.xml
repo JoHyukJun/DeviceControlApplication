@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_default"
-        android:onClick="mOnClick"
+        android:onClick="mHomeOnClick"
         android:textColor="@color/White"
         android:text="신규 디바이스 등록"
         android:textSize="20sp"/>
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_default"
-        android:onClick="mOnClick"
+        android:onClick="mHomeOnClick"
         android:textColor="@color/White"
         android:text="디바이스 제거"
         android:textSize="20sp"/>
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_default"
-        android:onClick="mOnClick"
+        android:onClick="mHomeOnClick"
         android:textColor="@color/White"
         android:text="디바이스 선택"
         android:textSize="20sp"/>
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_default"
-        android:onClick="mOnClick"
+        android:onClick="mHomeOnClick"
         android:textColor="@color/White"
         android:text="로그아웃"
         android:textSize="20sp"/>
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_default"
-        android:onClick="mOnClick"
+        android:onClick="mHomeOnClick"
         android:textColor="@color/White"
         android:text="유저 정보 변경"
         android:textSize="20sp"/>

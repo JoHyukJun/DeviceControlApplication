@@ -1,8 +1,10 @@
 package com.example.johyukjun.project;
 
 import android.content.Intent;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
+    private static final String TAG = HomeActivity.class.getSimpleName();
     ArrayList<String> m_Device;
     ArrayAdapter<String> m_Adapter;
     ListView m_ListView;
@@ -42,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
                 tv.setTextColor(getResources().getColor(R.color.White));
                 return view;
             }
+
         };
 
         m_ListView = (ListView) findViewById(R.id.listDevice);
@@ -60,18 +64,41 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+        //디바이스 리스트 요청
+        if (SendThread.mHandler != null) {
+            Message msg = Message.obtain();
+            msg.what = 1;
+            msg.obj = XmlManager.MakeReqDeviceListXmlStr(MainActivity.GlobalID);
+            SendThread.mHandler.sendMessage(msg);
+
+
+            Log.d(TAG, MainActivity.recvData);
+        }
     }
 
-    public void mOnClick (View v) {
+    public void mHomeOnClick (View v) {
         Intent intent;
 
         switch (v.getId()) {
             case R.id.btnAddDevice:
-                String text = m_SerialNumber.getText().toString();
-                if (text.length() != 0) {
+                String serial = m_SerialNumber.getText().toString();
+
+                deviceItem tempItem = new deviceItem();
+
+                if (serial.length() != 0) {
                     m_Device.add("별명");
                     m_SerialNumber.setText("");
+                    tempItem.SetSerialNum(serial);
                     m_Adapter.notifyDataSetChanged();
+
+
+                    if (SendThread.mHandler != null) {
+                        Message msg = Message.obtain();
+                        msg.what = 1;
+                        msg.obj = XmlManager.MakeDeviceXmlStr(tempItem.GetNickName(), tempItem.GetSerialNum(), tempItem.GetAlias());
+                        SendThread.mHandler.sendMessage(msg);
+                    }
                 }
                 break;
 
@@ -95,6 +122,17 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case R.id.btnLogout:
+                if (SendThread.mHandler != null) {
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = XmlManager.MakeLogoutXmlStr(MainActivity.GlobalID);
+                    SendThread.mHandler.sendMessage(msg);
+
+                    MainActivity.GlobalID = "";
+
+                    intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
     }
@@ -105,14 +143,19 @@ public class HomeActivity extends AppCompatActivity {
 class deviceItem {
     private String serialNum;
     private String nickName;
+    private String alias;
 
     public deviceItem() {
+        serialNum = "";
+        nickName = "";
+        alias = "";
 
     }
 
-    public deviceItem(String inSerialNum, String inNickName) {
+    public deviceItem(String inSerialNum, String inNickName, String inAlias) {
         this.serialNum = inSerialNum;
         this.nickName = inNickName;
+        this.alias = inAlias;
     }
 
     public String GetSerialNum() {
@@ -121,6 +164,10 @@ class deviceItem {
 
     public String GetNickName() {
         return nickName;
+    }
+
+    public String GetAlias() {
+        return alias;
     }
 
     public void SetSerialNum(String inSerialNum) {

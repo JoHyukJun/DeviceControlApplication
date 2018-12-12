@@ -4,13 +4,21 @@ import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.DocumentsContract;
 import android.renderscript.ScriptGroup;
 
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.net.Socket;
 import java.util.logging.LogRecord;
+
 
 
 public class ClientThread extends Thread {
@@ -42,9 +50,13 @@ public class ClientThread extends Thread {
 
             SendThread sendThread = new SendThread(this, m_Sock.getOutputStream());
             RecvThread recvThread = new RecvThread(this, m_Sock.getInputStream());
+            //
 
             sendThread.start();
             recvThread.start();
+
+
+            //
             sendThread.join();
             recvThread.join();
 
@@ -127,10 +139,15 @@ class SendThread extends Thread {
 class RecvThread extends Thread {
     private ClientThread mClientThread;
     private InputStream mInStream;
+    public static String mRecvData;
 
     public RecvThread(ClientThread clientThread, InputStream inputStream) {
         mClientThread = clientThread;
         mInStream = inputStream;
+    }
+
+    public String GetRecvData() {
+        return mRecvData;
     }
 
     @Override
@@ -143,7 +160,8 @@ class RecvThread extends Thread {
 
                 if(nbytes > 0) {
                     String tempStr = new String(buf, 0, nbytes);
-                    mClientThread.doPrintln("RECEIVE DATA" + tempStr);
+                    mRecvData = tempStr;
+                    mClientThread.doPrintln("*" + tempStr);
                 }
                 else {
                     mClientThread.doPrintln("SERVER DISCONNECTED");

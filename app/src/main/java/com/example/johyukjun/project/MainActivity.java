@@ -21,7 +21,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private EditText m_Id, m_Password;
     private Button m_BtnLogIn, m_BtnSignUp;
-    private ClientThread mClientThread;
+    public static ClientThread mClientThread;
+
+    public static String fullData;
+    public static String recvData;
+
+    public static String GlobalID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,21 +67,22 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 1;
                     msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
                     SendThread.mHandler.sendMessage(msg);
+
+                    Log.d(TAG, recvData);
+
+                    if (XmlManager.ParseLoginXmlStr(recvData) == "complete") {
+                        GlobalID = id;
+
+                        //intentActivty = new Intent(this, HomeActivity.class);
+                        //startActivity(intentActivty);
+                    }
+                    intentActivty = new Intent(this, HomeActivity.class);
+                    startActivity(intentActivty);
+
                     m_Id.selectAll();
                 }
-
-                intentActivty = new Intent(this, HomeActivity.class);
-                startActivity(intentActivty);
                 // 디바이스 선택 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
-//                if (id.equals("jo") && pw.equals("0000")) {
-//                    intent = new Intent(this, HomeManagerActivity.class);
-//                    startActivity(intent);
-//                }
-//                else {
-//                    intent = new Intent(this, HomeActivity.class);
-//                    startActivity(intent);
-//                }
                 break;
 
             case R.id.btnSignUpActivity:
@@ -92,7 +98,14 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    Log.d(TAG, msg.obj.toString());
+                    fullData = msg.obj.toString();
+
+                    if (fullData != null || fullData != "") {
+                        recvData = fullData.substring(fullData.indexOf("*<") + 1);
+
+                    }
+
+                    Log.d(TAG, fullData);
                     break;
             }
         }
