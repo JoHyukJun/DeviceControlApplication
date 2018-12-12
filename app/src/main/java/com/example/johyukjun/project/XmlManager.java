@@ -117,6 +117,82 @@ public class XmlManager {
         return returnStr;
     }
 
+
+    public static String MakeSingUpXmlStr(String id, String pw, String name, String mobile, String email) {
+        //we create a XmlSerializer in order to write xml data
+        String returnStr = "";
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        XmlSerializer serializer = Xml.newSerializer();
+
+        try {
+            //we set the FileOutputStream as output for the serializer, using UTF-8 encoding
+            serializer.setOutput(stream, "UTF-8");
+            //Write <?xml declaration with encoding (if encoding not null) and standalone flag (if standalone not null)
+            serializer.startDocument(null, true);
+            //set indentation option
+            serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+
+            serializer.startTag(null,"IoTPacket");
+            serializer.attribute(null, "PacketType", "3");
+
+            serializer.startTag(null,"RegUserClient");
+            serializer.attribute(null, "ID", id);
+            serializer.attribute(null,"PW", pw);
+            serializer.attribute(null,"Name",name);
+            serializer.attribute(null, "Mobile", mobile);
+            serializer.attribute(null, "Email", email);
+            serializer.endTag(null,"RegUserClient");
+
+            serializer.endTag(null,"IoTPacket");
+
+            serializer.endDocument();
+            //write xml data into the OutputStream
+            serializer.flush();
+            returnStr = new String(stream.toByteArray());
+            stream.close();
+        } catch (Exception e) {
+            Log.e("Exception", "error occurred");
+        }
+        return returnStr;
+    }
+
+
+    public static String MakeDeviceXmlStr(String nickname, String serial, String alias) {
+        //we create a XmlSerializer in order to write xml data
+        String returnStr = "";
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        XmlSerializer serializer = Xml.newSerializer();
+
+        try {
+            //we set the FileOutputStream as output for the serializer, using UTF-8 encoding
+            serializer.setOutput(stream, "UTF-8");
+            //Write <?xml declaration with encoding (if encoding not null) and standalone flag (if standalone not null)
+            serializer.startDocument(null, true);
+            //set indentation option
+            serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+
+            serializer.startTag(null,"IoTPacket");
+            serializer.attribute(null, "PacketType", "4");
+
+            serializer.startTag(null,"RegDeviceClient");
+            serializer.attribute(null, "ID", "string");
+            serializer.attribute(null,"Serial", "string");
+            serializer.attribute(null, "Alias", "string");
+            serializer.endTag(null,"RegDeviceClient");
+
+            serializer.endTag(null,"IoTPacket");
+
+            serializer.endDocument();
+            //write xml data into the OutputStream
+            serializer.flush();
+            returnStr = new String(stream.toByteArray());
+            stream.close();
+        } catch (Exception e) {
+            Log.e("Exception", "error occurred");
+        }
+        return returnStr;
+    }
+
     // PacketType 2 : logout
 
     // PacketType 3 : Sign in

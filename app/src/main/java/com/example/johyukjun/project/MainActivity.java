@@ -69,14 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentActivty);
                 // 디바이스 선택 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
-//                if (id.equals("jo") && pw.equals("0000")) {
-//                    intent = new Intent(this, HomeManagerActivity.class);
-//                    startActivity(intent);
-//                }
-//                else {
-//                    intent = new Intent(this, HomeActivity.class);
-//                    startActivity(intent);
-//                }
                 break;
 
             case R.id.btnSignUpActivity:

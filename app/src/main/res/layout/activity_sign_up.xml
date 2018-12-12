@@ -168,6 +168,7 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="15dp"
             android:background="@drawable/button_default"
+            android:onClick="mSignUpOnClick"
             android:text="가입"
             android:textColor="@color/White"
             android:textSize="20sp" />
@@ -179,6 +180,7 @@
             android:layout_below="@id/btnSignUp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/button_default"
+            android:onClick="mSignUpOnClick"
             android:text="취소"
             android:textColor="@color/White"
             android:textSize="20sp" />
