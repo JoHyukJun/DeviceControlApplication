@@ -118,10 +118,8 @@ public class MainActivity extends AppCompatActivity {
                     if (fullData != null && fullData != "") {
                         if (fullData.indexOf("SEND") == -1)
                             recvData = fullData.substring(fullData.indexOf("*<?") + 1);
-
                     }
-
-                    Log.d(TAG, fullData);
+                    Log.d(TAG, "FULL DATA" + fullData);
                     Log.d(TAG, "받은 데이터 구현!!!" + recvData);
                     break;
                 case 0:
