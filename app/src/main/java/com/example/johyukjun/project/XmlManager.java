@@ -157,7 +157,7 @@ public class XmlManager {
     }
 
 
-    public static String MakeDeviceXmlStr(String nickname, String serial, String alias) {
+    public static String MakeDeviceXmlStr(String id, String serial, String alias) {
         //we create a XmlSerializer in order to write xml data
         String returnStr = "";
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -175,7 +175,7 @@ public class XmlManager {
             serializer.attribute(null, "PacketType", "4");
 
             serializer.startTag(null,"RegDeviceClient");
-            serializer.attribute(null, "ID", nickname);
+            serializer.attribute(null, "ID", id);
             serializer.attribute(null,"Serial", serial);
             serializer.attribute(null, "Alias", alias);
             serializer.endTag(null,"RegDeviceClient");
