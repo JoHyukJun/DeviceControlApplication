@@ -56,9 +56,7 @@ public class ClientThread extends Thread {
             sendThread.start();
             recvThread.start();
 
-            doPrintln("SERVER CONECTED");
-
-
+            //doPrintln("SERVER CONECTED");
             //
             sendThread.join();
             recvThread.join();

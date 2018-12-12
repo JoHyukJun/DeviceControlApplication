@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             msg.obj = XmlManager.MakeLoginXmlStr("User1", "1111");
             SendThread.mHandler.sendMessage(msg);
         }
+
     }
 
 
