@@ -7,14 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
-public class ChangeUserInfoActivity extends AppCompatActivity {
+public class UpdatUserInfo extends AppCompatActivity {
 
     private EditText m_CId, m_CPassword, m_CName, m_CMobile, m_CEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_user_info);
+        setContentView(R.layout.activity_updat_user_info);
 
         m_CId = (EditText) findViewById(R.id.editCId);
         m_CPassword = (EditText) findViewById(R.id.editCPassword);

@@ -126,7 +126,7 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case R.id.btnChangeUserInfo:
-                intent = new Intent(this, ChangeUserInfoActivity.class);
+                intent = new Intent(this, UpdatUserInfo.class);
                 startActivity(intent);
 
                 break;
