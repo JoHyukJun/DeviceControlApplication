@@ -43,16 +43,6 @@ public class Deivce_Activity extends AppCompatActivity {
         }
     }
 
-    public void mOnclick(View v)
-    {
-        switch (v.getId())
-        {
-            case R.id.btnBack:
-                //뒤로 가기
-                break;
-        }
-    }
-
     private void CreateButton() {
 
         //원래 있던 레이아웃 가져오기

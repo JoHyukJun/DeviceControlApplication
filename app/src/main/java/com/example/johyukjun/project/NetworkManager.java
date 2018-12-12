@@ -23,7 +23,7 @@ public class NetworkManager {
             case LOGIN:
                 // 로그인 성공시 화면 넘기는 함수
                 //
-                break;
+            break;
             case LOGOUT:
                 // 로그아웃 성공시 화면 넘기는 함수
                 break;
