@@ -113,6 +113,17 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.d(TAG, "받은 데이터 구현!!!" + recvData);
 
+                    if (recvData.indexOf("Serial") > -1) {
+                        deviceItem tempItem = new deviceItem();
+
+                        String [] devarr;
+
+                        devarr = XmlManager.ParseDeviceListXmlStr(MainActivity.recvData);
+                        HomeActivity.m_Device.add(devarr[1]);
+                        tempItem.SetSerialNum(devarr[0]);
+                        HomeActivity.m_Adapter.notifyDataSetChanged();
+                    }
+
                     break;
 
                 case 1:
