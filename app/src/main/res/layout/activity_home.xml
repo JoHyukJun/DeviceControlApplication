@@ -6,28 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/DarkBlue">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="S/N"
-            android:textColor="@color/White"
-            android:textSize="30dp" />
-
-        <EditText
-            android:id="@+id/editSerialNumber"
-            style="@style/EditTextTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="시리얼 넘버"
-            android:inputType="text" />
-    </LinearLayout>
 
     <Button
         android:id="@+id/btnAddDevice"

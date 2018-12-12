@@ -22,30 +22,20 @@
 
         <RelativeLayout
             android:id="@+id/IdLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_below="@+id/CBanner">
 
             <TextView
-                android:id="@+id/SId"
+                android:id="@+id/SIdview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_margin="10dp"
-                android:text="ID"
-                android:textColor="@color/White"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/editCId"
-                style="@style/EditTextTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_margin="10dp"
                 android:layout_toEndOf="@id/SId"
-                android:hint="아이디"
-                android:inputType="text" />
+                android:text="아이디"
+                android:textColor="@color/White"
+                android:textSize="30sp" />
         </RelativeLayout>
 
         <RelativeLayout
