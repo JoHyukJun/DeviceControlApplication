@@ -36,7 +36,8 @@
         android:background="@drawable/button_default"
         android:onClick="mOnClick"
         android:textColor="@color/White"
-        android:text="신규 디바이스 등록"/>
+        android:text="신규 디바이스 등록"
+        android:textSize="20sp"/>
     <Button
         android:id="@+id/btnRemoveDevice"
         android:layout_width="match_parent"
@@ -44,7 +45,8 @@
         android:background="@drawable/button_default"
         android:onClick="mOnClick"
         android:textColor="@color/White"
-        android:text="디바이스 제거"/>
+        android:text="디바이스 제거"
+        android:textSize="20sp"/>
     <Button
         android:id="@+id/btnSelectDevice"
         android:layout_width="match_parent"
@@ -52,7 +54,8 @@
         android:background="@drawable/button_default"
         android:onClick="mOnClick"
         android:textColor="@color/White"
-        android:text="디바이스 선택"/>
+        android:text="디바이스 선택"
+        android:textSize="20sp"/>
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
@@ -60,7 +63,8 @@
         android:background="@drawable/button_default"
         android:onClick="mOnClick"
         android:textColor="@color/White"
-        android:text="로그아웃"/>
+        android:text="로그아웃"
+        android:textSize="20sp"/>
     <Button
         android:id="@+id/btnChangeUserInfo"
         android:layout_width="match_parent"
@@ -68,12 +72,12 @@
         android:background="@drawable/button_default"
         android:onClick="mOnClick"
         android:textColor="@color/White"
-        android:text="유저 정보 변경"/>
+        android:text="유저 정보 변경"
+        android:textSize="20sp"/>
 
     <ListView
         android:id="@+id/listDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <!-- 리스트 색 바꿀 것 -->
     </ListView>
 </LinearLayout>

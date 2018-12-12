@@ -1,16 +1,16 @@
 package com.example.johyukjun.project;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class SignUpActivity extends AppCompatActivity {
+public class ChangeUserInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_change_user_info);
     }
 
     public void mOnclick(View v)
@@ -18,14 +18,14 @@ public class SignUpActivity extends AppCompatActivity {
         Intent intentActivty;
         switch (v.getId())
         {
-            case R.id.btnSignUp:
-                // 등록 버튼
-                intentActivty = new Intent(this, MainActivity.class);
+            case R.id.btnChange:
+                // 변경 버튼
+                intentActivty = new Intent(this, HomeActivity.class);
                 startActivity(intentActivty);
                 break;
-            case R.id.btnMCancel:
+            case R.id.btnCancel:
                 // 취소 버튼
-                intentActivty = new Intent(this, MainActivity.class);
+                intentActivty = new Intent(this, HomeActivity.class);
                 startActivity(intentActivty);
                 break;
         }

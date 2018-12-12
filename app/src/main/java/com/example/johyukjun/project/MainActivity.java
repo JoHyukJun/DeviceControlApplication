@@ -1,5 +1,6 @@
 package com.example.johyukjun.project;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -64,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
                     m_Id.selectAll();
                 }
 
-//                intentActivty = new Intent(this, HomeActivity.class);
-//                startActivity(intentActivty);
-                // 로그인 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
+                intentActivty = new Intent(this, HomeActivity.class);
+                startActivity(intentActivty);
+                // 디바이스 선택 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
 //                if (id.equals("jo") && pw.equals("0000")) {
 //                    intent = new Intent(this, HomeManagerActivity.class);
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler mMainHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

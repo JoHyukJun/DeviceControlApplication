@@ -1,122 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/DarkBlue">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_centerInParent="true">
 
         <TextView
+            android:id="@+id/DBanner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="S/N"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="50dp"
+            android:text="디바이스 등록"
             android:textColor="@color/White"
-            android:textSize="30dp" />
+            android:textSize="40sp" />
 
-        <EditText
-            android:id="@+id/editMSerialNumber"
-            style="@style/EditTextTheme"
+        <RelativeLayout
+            android:id="@+id/SerialLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="시리얼 넘버"
-            android:inputType="text" />
+            android:layout_below="@+id/DBanner">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/MSerialNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:text="S/N"
+                android:textColor="@color/White"
+                android:textSize="30sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/editMSerialNumber"
+                style="@style/EditTextTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/MSerialNumber"
+                android:hint="시리얼 넘버"
+                android:inputType="text" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="D/N"
-            android:textColor="@color/White"
-            android:textSize="30dp" />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/editMDeviceName"
-            style="@style/EditTextTheme"
+        <RelativeLayout
+            android:id="@+id/DeviceNameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="기기명"
-            android:inputType="text" />
+            android:layout_below="@+id/SerialLayout">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/MDeviceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:text="D/N"
+                android:textColor="@color/White"
+                android:textSize="30sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/editMDeviceName"
+                style="@style/EditTextTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@id/MDeviceName"
+                android:hint="기기명"
+                android:inputType="text" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnMAddDevice"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="D/T"
+            android:layout_below="@+id/DeviceNameLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
+            android:background="@drawable/button_default"
+            android:onClick="mOnClick"
+            android:text="신규 디바이스 등록"
             android:textColor="@color/White"
-            android:textSize="30dp" />
+            android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/editMDeviceType"
-            style="@style/EditTextTheme"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnMCancel"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="기기종류"
-            android:inputType="text" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="A/I"
+            android:layout_below="@+id/btnMAddDevice"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_default"
+            android:onClick="mOnClick"
+            android:text="취소"
             android:textColor="@color/White"
-            android:textSize="30dp" />
-
-        <EditText
-            android:id="@+id/editMActivityInfo"
-            style="@style/EditTextTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="화면구성정보"
-            android:inputType="text" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnMAddDevice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_default"
-        android:onClick="mOnClick"
-        android:textColor="@color/White"
-        android:text="신규 디바이스 등록" />
-
-    <Button
-        android:id="@+id/btnMRemoveDevice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_default"
-        android:onClick="mOnClick"
-        android:textColor="@color/White"
-        android:text="디바이스 제거" />
-</LinearLayout>
+            android:textSize="20sp" />
+    </RelativeLayout>
+</RelativeLayout>
