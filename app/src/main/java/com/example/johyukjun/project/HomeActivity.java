@@ -70,7 +70,13 @@ public class HomeActivity extends AppCompatActivity {
 
         }
 
-        if (MainActivity.recvData != null) {
+
+    }
+
+    public void onStart() {
+        super.onStart();
+
+        if (!XmlManager.ParseLoginXmlStr(MainActivity.recvData).equals("done")) {
             deviceItem tempItem = new deviceItem();
 
             String [] devarr;
@@ -80,6 +86,12 @@ public class HomeActivity extends AppCompatActivity {
             tempItem.SetSerialNum(devarr[0]);
             m_Adapter.notifyDataSetChanged();
         }
+    }
+
+    public void onPause()
+    {
+        super.onPause();
+
     }
 
     public void mHomeOnClick(View v) {
