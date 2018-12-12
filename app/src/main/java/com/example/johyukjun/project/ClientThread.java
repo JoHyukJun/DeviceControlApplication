@@ -47,10 +47,7 @@ public class ClientThread extends Thread {
         try {
             m_Sock = new Socket(serverIp, serverPort);
 
-<<<<<<< HEAD
             //doPrintln("SERVER CONEETED");
-=======
->>>>>>> fb31ded9290629f454bd1f16f870560ebba0e534
 
             SendThread sendThread = new SendThread(this, m_Sock.getOutputStream());
             RecvThread recvThread = new RecvThread(this, m_Sock.getInputStream());
