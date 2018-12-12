@@ -43,12 +43,6 @@ public class MainActivity extends AppCompatActivity {
         mClientThread = new ClientThread(mMainHandler);
         mClientThread.start();
 
-        if (SendThread.mHandler != null) {
-            Message msg = Message.obtain();
-            msg.what = 1;
-            msg.obj = XmlManager.MakeLoginXmlStr("User1", "1111");
-            SendThread.mHandler.sendMessage(msg);
-        }
     }
 
 
