@@ -109,7 +109,7 @@ public class Deivce_Activity extends AppCompatActivity {
 
                     Message msg = Message.obtain();
                     msg.what = 1;
-                    msg.obj = XmlManager.MakeCtrlDeviceXmlStr(MainActivity.GlobalID, tempSerial, "LED_IN");
+                    msg.obj = XmlManager.MakeCtrlDeviceXmlStr(MainActivity.GlobalID, tempSerial, "LED_ON");
                     SendThread.mHandler.sendMessage(msg);
                 }
             }
