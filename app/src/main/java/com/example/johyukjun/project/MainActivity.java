@@ -70,14 +70,14 @@ public class MainActivity extends AppCompatActivity {
 
                     Log.d(TAG, recvData);
 
-                    if (XmlManager.ParseLoginXmlStr(recvData) == "complete") {
+                    if (XmlManager.ParseLoginXmlStr(recvData) == "fail") {
                         GlobalID = id;
 
-                        //intentActivty = new Intent(this, HomeActivity.class);
-                        //startActivity(intentActivty);
+                        intentActivty = new Intent(this, HomeActivity.class);
+                        startActivity(intentActivty);
                     }
-                    intentActivty = new Intent(this, HomeActivity.class);
-                    startActivity(intentActivty);
+//                    intentActivty = new Intent(this, HomeActivity.class);
+//                    startActivity(intentActivty);
 
                     m_Id.selectAll();
                 }
@@ -100,12 +100,14 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     fullData = msg.obj.toString();
 
-                    if (fullData != null || fullData != "") {
-                        recvData = fullData.substring(fullData.indexOf("*<") + 1);
+                    if (fullData != null && fullData != "") {
+                        if (fullData.indexOf("SEND") == -1)
+                        recvData = fullData.substring(fullData.indexOf("*<?") + 1);
 
                     }
 
                     Log.d(TAG, fullData);
+                    Log.d(TAG, "받은 데이터 구현!!!" + recvData);
                     break;
             }
         }
