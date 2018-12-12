@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Vector;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -227,8 +228,9 @@ public class XmlManager {
         return returnStr;
     }
 
-    public static String[] ParseDeviceListXmlStr(String xmlStr) {
-        String[] returnStr = new String[3];
+    public static Vector<String[]> ParseDeviceListXmlStr(String xmlStr) {
+        Vector<String[]>returnStr = new Vector<>();
+        String [] tempStr = new String[3];
 
         XmlPullParserFactory parserFactory;
         try {
@@ -243,6 +245,7 @@ public class XmlManager {
             String text;
             String [] serverReply = new String[3];
             String packetType = "";
+            int count = 0;
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType)
@@ -258,11 +261,13 @@ public class XmlManager {
 //                            returnStr = serverReply;
                         }
                         else if(parser.getName().equals("Data")){
+                            count = parser.getNamespaceCount(parser.getDepth());
                         }
                         else if(parser.getName().equals("Device")){
-                            returnStr[0] = parser.getAttributeValue(null,"Serial");
-                            returnStr[1] = parser.getAttributeValue(null, "Alias");
-                            returnStr[2] = parser.getAttributeValue(null, "Connect");
+                            tempStr[0] = parser.getAttributeValue(null,"Serial");
+                            tempStr[1] = parser.getAttributeValue(null, "Alias");
+                            tempStr[2] = parser.getAttributeValue(null, "Connect");
+                            returnStr.add(tempStr);
                         }
                         break;
                     case XmlPullParser.END_TAG:

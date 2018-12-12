@@ -116,11 +116,14 @@ public class MainActivity extends AppCompatActivity {
                     if (recvData.indexOf("Serial") > -1) {
                         deviceItem tempItem = new deviceItem();
 
+                        Vector<String[]> temp = XmlManager.ParseDeviceListXmlStr(MainActivity.recvData);
                         String [] devarr;
-
-                        devarr = XmlManager.ParseDeviceListXmlStr(MainActivity.recvData);
-                        HomeActivity.m_Device.add(devarr[1]);
-                        tempItem.SetSerialNum(devarr[0]);
+                        for(int i = 0; i < temp.size(); i++)
+                        {
+                            devarr = temp.get(i);
+                            HomeActivity.m_Device.add(devarr[1]);
+                            tempItem.SetSerialNum(devarr[0]);
+                        }
                         HomeActivity.m_Adapter.notifyDataSetChanged();
                     }
 

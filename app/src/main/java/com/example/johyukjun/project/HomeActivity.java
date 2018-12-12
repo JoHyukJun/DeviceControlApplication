@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = HomeActivity.class.getSimpleName();
-    ArrayList<String> m_Device;
-    ArrayAdapter<String> m_Adapter;
+    public static ArrayList<String> m_Device;
+    public static ArrayAdapter<String> m_Adapter;
     ListView m_ListView;
     Button m_BtnAdd, m_BtnRemove;
 
