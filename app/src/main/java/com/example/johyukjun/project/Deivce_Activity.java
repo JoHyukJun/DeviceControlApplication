@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -28,6 +29,8 @@ public class Deivce_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deivce_);
+
+        intentActivty = getIntent();
 
         // 패킷을 받아서
 
@@ -100,6 +103,15 @@ public class Deivce_Activity extends AppCompatActivity {
                 Log.d("log", "position :" + position);
                 Toast.makeText(getApplicationContext(), "클릭한 position:" + position, Toast.LENGTH_LONG).show();
                 // LED_ON과 같은 packet 만들어서 보내기
+
+                if (SendThread.mHandler != null) {
+                    String tempSerial = intentActivty.getStringExtra("serial");
+
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = XmlManager.MakeCtrlDeviceXmlStr(MainActivity.GlobalID, tempSerial, "LED_IN");
+                    SendThread.mHandler.sendMessage(msg);
+                }
             }
 
         });
