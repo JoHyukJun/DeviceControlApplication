@@ -21,6 +21,8 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = HomeActivity.class.getSimpleName();
     public static ArrayList<deviceItem> m_Device;
+    public static ArrayList<String> m_foo;
+    public static ArrayAdapter<String> a_foo;
     public static ArrayAdapter<deviceItem> m_Adapter;
     ListView m_ListView;
     Button m_BtnAdd, m_BtnRemove;

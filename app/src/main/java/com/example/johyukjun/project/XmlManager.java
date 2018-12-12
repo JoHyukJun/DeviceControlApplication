@@ -569,6 +569,7 @@ public class XmlManager {
             serializer.startTag(null,"SelDeviceClient");
             serializer.attribute(null, "ID", id);
             serializer.attribute(null, "Serial", serial);
+            serializer.attribute(null, "ScreenInfo", "1");
             serializer.endTag(null,"SelDeviceClient");
 
             serializer.endTag(null,"IoTPacket");
@@ -621,8 +622,6 @@ public class XmlManager {
     }
 
 
-<<<<<<< HEAD
-=======
     public static String MakeCtrlDeviceXmlStr(String id, String serial, String fucn) {
         //we create a XmlSerializer in order to write xml data
         String returnStr = "";
@@ -659,7 +658,6 @@ public class XmlManager {
         return returnStr;
     }
 
->>>>>>> 0d5ce3ac75dd9e252989177444b51c005b234b6c
     // PacketType 2 : logout
 
     // PacketType 3 : Sign in

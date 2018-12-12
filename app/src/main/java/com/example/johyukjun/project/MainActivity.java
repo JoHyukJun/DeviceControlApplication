@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                             tempItem.SetAlias(devarr[1]);
                             HomeActivity.m_Device.add(tempItem);
                         }
+
                         HomeActivity.m_Adapter.notifyDataSetChanged();
                     }
                     else if (recvData.indexOf("Status data") > -1) {

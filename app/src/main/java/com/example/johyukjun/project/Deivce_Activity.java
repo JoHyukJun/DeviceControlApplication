@@ -67,7 +67,7 @@ public class Deivce_Activity extends AppCompatActivity {
         // TextView 생성
         TextView tvProdc = new TextView(this);
         tvProdc.setId(R.id.device_text_view);
-        tvProdc.setText("DeviceName");
+        tvProdc.setText("LED_DEVICE");
         tvProdc.setTextColor(getResources().getColor(R.color.White));
         /*변경된 값의 파라미터를 해당 레이아웃 파라미터 값에 셋팅*/
         tvProdc.setLayoutParams(tvControl);
@@ -101,7 +101,7 @@ public class Deivce_Activity extends AppCompatActivity {
             // 이 안에 클릭했을 경우 발생하는 이벤트
             public void onClick(View v) {
                 Log.d("log", "position :" + position);
-                Toast.makeText(getApplicationContext(), "클릭한 position:" + position, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "LED_ON", Toast.LENGTH_LONG).show();
                 // LED_ON과 같은 packet 만들어서 보내기
 
                 if (SendThread.mHandler != null) {
@@ -147,8 +147,16 @@ public class Deivce_Activity extends AppCompatActivity {
             // 이 안에 클릭했을 경우 발생하는 이벤트
             public void onClick(View v) {
                 Log.d("log", "position :" + position_2);
-                Toast.makeText(getApplicationContext(), "클릭한 position:" + position_2, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "LED_OFF", Toast.LENGTH_LONG).show();
                 // LED_ON과 같은 packet 만들어서 보내기
+                if (SendThread.mHandler != null) {
+                    String tempSerial = intentActivty.getStringExtra("serial");
+
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    msg.obj = XmlManager.MakeCtrlDeviceXmlStr(MainActivity.GlobalID, tempSerial, "LED_OFF");
+                    SendThread.mHandler.sendMessage(msg);
+                }
             }
 
         });
