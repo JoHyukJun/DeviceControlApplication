@@ -46,7 +46,6 @@ public class ClientThread extends Thread {
         try {
             m_Sock = new Socket(serverIp, serverPort);
 
-            doPrintln("SERVER CONEETED");
 
             SendThread sendThread = new SendThread(this, m_Sock.getOutputStream());
             RecvThread recvThread = new RecvThread(this, m_Sock.getInputStream());
@@ -54,6 +53,8 @@ public class ClientThread extends Thread {
 
             sendThread.start();
             recvThread.start();
+
+            doPrintln("SERVER CONECTED");
 
 
             //
@@ -82,7 +83,7 @@ public class ClientThread extends Thread {
     public void doPrintln(String inStr) {
         Message tempMsg = Message.obtain();
         tempMsg.what = 1;
-        tempMsg.obj = inStr + "\n";
+        tempMsg.obj = inStr;
 
         mMainHandler.sendMessage(tempMsg);
 
@@ -152,6 +153,7 @@ class RecvThread extends Thread {
 
     @Override
     public void run() {
+
         byte[] buf = new byte[1024];
 
         while (true) {

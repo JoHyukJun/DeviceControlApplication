@@ -68,18 +68,20 @@ public class MainActivity extends AppCompatActivity {
                     msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
                     SendThread.mHandler.sendMessage(msg);
 
-                    Log.d(TAG, recvData);
+                    m_Id.selectAll();
 
-                    if (XmlManager.ParseLoginXmlStr(recvData) == "fail") {
+
+                    Log.d(TAG, "CLICKEVENT  " + recvData);
+
+                    
+                    if (XmlManager.ParseLoginXmlStr(recvData) == "done") {
                         GlobalID = id;
+
+                        Log.d(TAG, "COMPLETE");
 
                         intentActivty = new Intent(this, HomeActivity.class);
                         startActivity(intentActivty);
                     }
-//                    intentActivty = new Intent(this, HomeActivity.class);
-//                    startActivity(intentActivty);
-
-                    m_Id.selectAll();
                 }
                 // 디바이스 선택 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
@@ -92,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("HandlerLeak")
     private Handler mMainHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -101,12 +102,15 @@ public class MainActivity extends AppCompatActivity {
                     fullData = msg.obj.toString();
 
                     if (fullData != null && fullData != "") {
-                        if (fullData.indexOf("SEND") == -1)
+                        if (fullData.indexOf("*<?") > -1)
                         recvData = fullData.substring(fullData.indexOf("*<?") + 1);
+                        else {
+
+                        }
 
                     }
 
-                    Log.d(TAG, fullData);
+                    Log.d(TAG, "FULL DATA" + fullData);
                     Log.d(TAG, "받은 데이터 구현!!!" + recvData);
                     break;
             }
