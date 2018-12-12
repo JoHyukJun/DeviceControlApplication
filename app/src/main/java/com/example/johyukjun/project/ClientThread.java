@@ -161,7 +161,7 @@ class RecvThread extends Thread {
                 if(nbytes > 0) {
                     String tempStr = new String(buf, 0, nbytes);
                     mRecvData = tempStr;
-                    mClientThread.doPrintln("RECEIVE DATA" + tempStr);
+                    mClientThread.doPrintln("*" + tempStr);
                 }
                 else {
                     mClientThread.doPrintln("SERVER DISCONNECTED");

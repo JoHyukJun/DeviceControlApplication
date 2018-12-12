@@ -73,7 +73,7 @@ public class HomeActivity extends AppCompatActivity {
             SendThread.mHandler.sendMessage(msg);
 
 
-            Log.d(TAG, MainActivity.xmlData);
+            Log.d(TAG, MainActivity.recvData);
         }
     }
 

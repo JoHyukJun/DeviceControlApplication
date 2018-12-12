@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Button m_BtnLogIn, m_BtnSignUp;
     public static ClientThread mClientThread;
 
-    public static String xmlData;
+    public static String fullData;
+    public static String recvData;
 
     public static String GlobalID;
 
@@ -67,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
                     msg.obj = XmlManager.MakeLoginXmlStr(id, pw);
                     SendThread.mHandler.sendMessage(msg);
 
-                    Log.d(TAG, xmlData);
+                    Log.d(TAG, recvData);
 
-                    if (XmlManager.ParseLoginXmlStr(xmlData) == "complete") {
+                    if (XmlManager.ParseLoginXmlStr(recvData) == "complete") {
                         GlobalID = id;
 
                         //intentActivty = new Intent(this, HomeActivity.class);
@@ -80,13 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
                     m_Id.selectAll();
                 }
-
-//                if (XmlManager.ParseLoginXmlStr("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>") == "done") {
-//                    GlobalID = id;
-//
-//                    intentActivty = new Intent(this, HomeActivity.class);
-//                    startActivity(intentActivty);
-//                }
                 // 디바이스 선택 후에는 주기적으로 패킷을 보내서 디바이스 상태를 받음
 
                 break;
@@ -104,8 +98,14 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    xmlData = msg.obj.toString();
-                    Log.d(TAG, xmlData);
+                    fullData = msg.obj.toString();
+
+                    if (fullData != null || fullData != "") {
+                        recvData = fullData.substring(fullData.indexOf("*<") + 1);
+
+                    }
+
+                    Log.d(TAG, fullData);
                     break;
             }
         }
